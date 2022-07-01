@@ -1,20 +1,30 @@
-import {scaleLinear} from "d3-scale"
+import * as d3 from "d3"
+import React, { useEffect } from "react"
 
-const Render = () => {
-    const points = [
-        {planet: "Mercury", size: 1526}, 
-        {planet: "Earth", size: 3959}, 
-    ];
+class Render extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {isToggleOn: true};
+        this.handleZoom = this.handleZoom.bind(this);
+        this.svg = d3.create("svg").attr("viewBox", [0, 0, 500, 500]);
+    }
 
-    const xScale = scaleLinear().domain([0, points.length]).range([10, 500]);
+    handleZoom(e) {
+        this.setState(prevSate => ({
+            isToggleOn: !prevSate.isToggleOn
+        }));
+    }
 
-    return <svg style={{backgroundColor: "black"}} className="plane-renderer">
-        {points.map((o, index) => (
-            <g transform={`translate(${xScale(index)}, ${600})`}>
-                <circle style={{fill: "red"}} color={"gold"} r={5}/>
-            </g>
-        ))}
-    </svg>
+    render() { 
+        return (<svg style={{backgroundColor: "black"}} 
+                     className="plane-renderer"
+                >
+                    <g transform={`translate(${700}, ${600})`} onClick={(e) => this.handleZoom(e)}>
+                        <circle style={{fill: this.state.isToggleOn ? "red" : "gold"}} color={"gold"} r={10}/>
+                    </g>
+                </svg>)
+        // return this.svg;
+    }
 }
 
 export default Render
