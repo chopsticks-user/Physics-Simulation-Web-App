@@ -3,7 +3,9 @@ import PropTypes from "prop-types"
 const Plane = (props) => {
   return (
     <div className="plane-container">
-
+      <svg className="plane-renderer">
+        
+      </svg>
     </div>
   )
 }
