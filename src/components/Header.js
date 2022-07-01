@@ -2,18 +2,10 @@ import PropTypes from "prop-types"
 
 const Header = (props) => {
   return (
-    <header>
-      <div className="header-container">
-        {/* <h1 style={{color: "red"}}>{props.title}</h1> */}
-        <h1 style={headerStyle}>{props.title}</h1>
-      </div>
-    </header>
-  )
-}
+    <div className="header-container">
 
-const headerStyle = {
-    color: "red", 
-    backgroundColor: "black", 
+    </div>
+  )
 }
 
 Header.defaultProps = {
