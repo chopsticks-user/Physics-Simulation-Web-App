@@ -15,8 +15,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <Header title = "header"/>
-        <Plane title = "plane"/>
+        <Header/>
+        <Plane/>
       </div>
     );
   }
