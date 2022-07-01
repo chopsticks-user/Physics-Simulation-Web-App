@@ -1,11 +1,10 @@
 import PropTypes from "prop-types"
+import Render from "./Render.js"
 
 const Plane = (props) => {
   return (
     <div className="plane-container">
-      <svg className="plane-renderer">
-        
-      </svg>
+      <Render/>
     </div>
   )
 }

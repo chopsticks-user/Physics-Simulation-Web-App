@@ -11,5 +11,4 @@
 .plane-renderer {
   height: calc(100% - var(--components-border-radius));
   width: calc(100% - var(--components-border-radius));
-  color: white;
 }
