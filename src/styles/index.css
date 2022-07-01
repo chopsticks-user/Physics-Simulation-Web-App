@@ -27,7 +27,6 @@ code {
     monospace;
 }
 
-
 .container {
   padding: var(--body-padding);
   height: 100vh;
@@ -35,20 +34,4 @@ code {
   border: var(--body-border);
   display: flex;
   flex-direction: column;
-}
-
-.header-container {
-  height: var(--header-height-to-body);
-  margin-bottom: var(--body-padding);
-  border: var(--components-border);
-  border-radius: var(--components-border-radius);
-  background-color: var(--header-background-color);
-}
-
-.plane-container {
-  /* height: var(100% - var(--body-padding) * 3 - var(--header-height-to-body)); */
-  height: 100%;
-  border: var(--components-border);
-  border-radius: var(--components-border-radius);
-  background-color: var(--plane-background-color);
 }

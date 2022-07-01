@@ -1,0 +1,7 @@
+.header-container {
+    height: var(--header-height-to-body);
+    margin-bottom: var(--body-padding);
+    border: var(--components-border);
+    border-radius: var(--components-border-radius);
+    background-color: var(--header-background-color);
+}
