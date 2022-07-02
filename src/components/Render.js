@@ -3,24 +3,22 @@ import { useEffect, useRef, useState } from 'react'
 
 const Render = () => {
     const ref = useRef();
-    const colors = ["black", "white", "gold", "blue", "green"];
-    var pickedColor;
-    var coor = `translate(${Math.floor(Math.random() * 1000)}, ${Math.floor(Math.random() * 800)})`
     
     useEffect(() => {
         const current = ref.current;
-        current.addEventListener("mousewheel", (e) => {
-            console.log(`${e.clientX} ${e.clientY}`);
-            pickedColor = colors[Math.floor(Math.random() * colors.length)];
-            document.querySelector(".plane-renderer").style.backgroundColor = pickedColor;
-        });
+        const plane = d3.select(current);
+        current.addEventListener("click", (e) => {
+            plane.append("circle")
+                .attr("cx", e.offsetX)
+                .attr("cy", e.offsetY)
+                .attr("r", 10)
+                .attr("fill", "red")
+        }, []);
     });
 
     return (
         <svg className="plane-renderer" ref={ref}>
-            <g className="red-circle" transform={coor}>
-                <circle style={{fill: "red"}} r={10}></circle>
-            </g>
+            
         </svg>
     );
 }
