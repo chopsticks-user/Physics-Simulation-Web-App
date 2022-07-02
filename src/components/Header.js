@@ -4,13 +4,11 @@ import React from "react"
 const Header = (props) => {
   const ref = React.useRef();
 
-  const scrollHandle = (e) => {
-    alert(e.clientX);
-  }
-
   React.useEffect(() => {
-    const cur = ref.current
-    cur.addEventListener("mousewheel", scrollHandle)
+    const cur = ref.current;
+    cur.addEventListener("mousewheel", (e) => {
+      alert(e.clientX);
+    });
   })
 
   return (
