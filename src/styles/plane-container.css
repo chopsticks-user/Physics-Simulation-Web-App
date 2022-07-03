@@ -2,13 +2,14 @@
   height: 100%;
   border: var(--components-border);
   border-radius: var(--components-border-radius);
-  background-color: var(--plane-background-color);
+  /* background-color: var(--plane-background-color); */
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.plane-renderer {
+.space-2d-container {
   height: calc(100% - var(--components-border-radius));
   width: calc(100% - var(--components-border-radius));
 }

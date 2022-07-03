@@ -1,10 +1,10 @@
 import PropTypes from "prop-types"
-import Render from "./Render.js"
+import Space2D from "./Space-2D.js"
 
 const Plane = (props) => {
   return (
     <div className="plane-container">
-      <Render/>
+      <Space2D/>
     </div>
   )
 }
