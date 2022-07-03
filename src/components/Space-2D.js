@@ -5,15 +5,20 @@ import Plane from "./Plane";
 
 const Space2D = (props) => {
     const ref = useRef();
+
+    const [state, setState] = useState({x: Math.floor(Math.random() * 1000), y: Math.floor(Math.random() * 800)});
     
     const run = (e) => {
+        console.log(state);
         const plane = d3.select(ref.current);
+        setState({x: Math.floor(Math.random() * 1000), y: Math.floor(Math.random() * 800)});
         plane.append("circle")
-            .attr("cx", Math.floor(Math.random() * 1000))
-            .attr("cy", Math.floor(Math.random() * 800))
+            .attr("cx", state.x)
+            .attr("cy", state.y)
             .attr("r", 10)
             .attr("fill", "red");
-        console.log(plane);
+        console.log(state.x, state.y);
+        console.log(state);
     };
     // useEffect(() => {
     //     const current = ref.current;
