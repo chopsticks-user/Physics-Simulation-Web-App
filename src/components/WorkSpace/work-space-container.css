@@ -7,8 +7,3 @@
   justify-content: center;
   align-items: center;
 }
-
-.space-2d-container {
-  height: calc(100% - var(--components-border-radius));
-  width: calc(100% - var(--components-border-radius));
-}
