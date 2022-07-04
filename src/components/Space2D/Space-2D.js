@@ -5,47 +5,43 @@ import PropTypes from "prop-types"
 const Space2D = (props) => {
     const ref = useRef();
 
-    const [state, setState] = useState({x: Math.floor(Math.random() * 1000), y: Math.floor(Math.random() * 800)});
+    let eventAdded = false;
     
-    const run = (e) => {
-        console.log(state);
-        const plane = d3.select(ref.current);
-        setState({x: Math.floor(Math.random() * 1000), y: Math.floor(Math.random() * 800)});
-        plane.append("circle")
-            .attr("cx", state.x)
-            .attr("cy", state.y)
-            .attr("r", 10)
-            .attr("fill", "red");
-        console.log(state.x, state.y);
-        console.log(state);
-    };
-    // useEffect(() => {
-    //     const current = ref.current;
-    //     const plane = d3.select(current);
+    useEffect(() => {
+        if(!eventAdded) {
+            eventAdded = true;
+            return;
+        }
+
+        const currentRef = ref.current;
+        const currentD3 = d3.select(ref.current)
+        .call(d3.zoom().on("zoom", () => {
+            currentD3.attr("transform", "translate(" + d3.zoomTransform(currentD3.node()).x + "," + d3.zoomTransform(currentD3.node()).y + ") scale(" + d3.zoomTransform(currentD3.node()).k + ")");
+            currentD3.selectAll(".unzoomable").attr("r", 5 / (d3.zoomTransform(currentD3.node()).k));
+        }))
+        .append("g");
         
-    //     // window.addEventListener("resize", () => {
-    //         //     // width = current.width.animVal.value;
-    //         //     // height = current.height.animVal.value;
-    //         // });
-            
-    //     current.addEventListener("click", (e) => {
-    //         plane.append("circle")
-    //         .attr("cx", e.offsetX)
-    //         .attr("cy", e.offsetY)
-    //         .attr("r", 10)
-    //         .attr("fill", "red");
-    //     });
-    //     const zoomHandler = d3.zoom()
-    //         .scaleExtent(.1, 5)
-    //         .translateExtent([[0, 0], [current.width.animVal.value, current.height.animVal.value]])
-    //         .on("zoom", () => {
-            
-    //         });
-    //     plane.call(zoom.transform, d3.zoomIdentity);
-    // }, []);
+        // window.addEventListener("resize", () => {
+            //         setSize({width: current.width.animVal.value, height: current.height.animVal.value})
+            //         console.log(size.width, size.height);
+            //     });
+        // currentRef.removeEventListener("click", addCircle(e, currentD3));
+        currentRef.addEventListener("click", (e) => {
+            const rand = Math.floor(Math.random() * 2);
+            let className = rand === 0? "unzoomable": "zoomable";
+            console.log(d3.zoomTransform(currentD3.node()).x, d3.zoomTransform(currentD3.node()).y);
+            currentD3.append("circle")
+            .attr("cx", (e.offsetX - d3.zoomTransform(currentD3.node()).x) / d3.zoomTransform(currentD3.node()).k)
+            .attr("cy", (e.offsetY - d3.zoomTransform(currentD3.node()).y) / d3.zoomTransform(currentD3.node()).k)
+            .attr("r", 5 / d3.zoomTransform(currentD3.node()).k)
+            .attr("fill", "red")
+            .attr("class", className);
+        });
+
+    }, []);
 
     return (
-        <svg className="space-2d-container" ref={ref} onClick={(e) => run(e)}>
+        <svg className="space-2d-container" ref={ref}>
 
         </svg>
     );
