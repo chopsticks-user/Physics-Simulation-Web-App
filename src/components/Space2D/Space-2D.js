@@ -6,6 +6,8 @@ const Space2D = (props) => {
     const ref = useRef();
 
     let eventAdded = false;
+
+    const zoomHandler = d3.zoom().scaleExtent([0.001, 10])
     
     useEffect(() => {
         if(!eventAdded) {
@@ -15,7 +17,7 @@ const Space2D = (props) => {
 
         const currentRef = ref.current;
         const currentD3 = d3.select(ref.current)
-        .call(d3.zoom().on("zoom", () => {
+        .call(zoomHandler.on("zoom", () => {
             currentD3.attr("transform", "translate(" + d3.zoomTransform(currentD3.node()).x + "," + d3.zoomTransform(currentD3.node()).y + ") scale(" + d3.zoomTransform(currentD3.node()).k + ")");
             currentD3.selectAll(".unzoomable").attr("r", 5 / (d3.zoomTransform(currentD3.node()).k));
         }))
