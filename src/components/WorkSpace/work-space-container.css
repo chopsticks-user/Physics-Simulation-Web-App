@@ -1,9 +1,8 @@
-.plane-container {
+.work-space-container {
   height: 100%;
   border: var(--components-border);
   border-radius: var(--components-border-radius);
-  /* background-color: var(--plane-background-color); */
-  background-color: white;
+  background-color: var(--plane-background-color);
   display: flex;
   justify-content: center;
   align-items: center;

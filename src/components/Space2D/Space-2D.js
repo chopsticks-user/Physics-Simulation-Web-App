@@ -1,7 +1,6 @@
 import * as d3 from "d3"
 import { useEffect, useRef, useState } from 'react'
 import PropTypes from "prop-types"
-import Plane from "./Plane";
 
 const Space2D = (props) => {
     const ref = useRef();
