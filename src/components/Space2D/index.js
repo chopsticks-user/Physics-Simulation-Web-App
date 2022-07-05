@@ -1,1 +1,1 @@
-export { default } from "./Space-2D"
+export { default } from "./Space2D"
