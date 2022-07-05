@@ -1,20 +1,24 @@
 import PropTypes from "prop-types"
 import Space2D from "../Space2D"
 
-const WorkSpace = (props) => {
+const WorkSpace = ({backgroundColor}) => {
   return (
-    <div className="work-space-container">
+    <div className="work-space-container" 
+         style={{
+          backgroundColor: backgroundColor, 
+         }}
+    >
       <Space2D/>
     </div>
   )
 }
 
 WorkSpace.defaultProps = {
-    title: "WorkSpace", 
+    backgroundColor: "black", 
 }
 
 WorkSpace.propTypes = {
-    title: PropTypes.string.isRequired, 
+    backgroundColor: PropTypes.string.isRequired, 
 }
 
 export default WorkSpace

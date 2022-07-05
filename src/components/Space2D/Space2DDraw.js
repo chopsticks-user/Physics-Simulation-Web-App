@@ -1,6 +1,6 @@
 import * as d3 from "d3"
 
-export const drawGridD3 = (planeD3, drawSpaceW, drawSpaceH, gridArea, displayGrid, displayAxes) => {
+export const drawGridD3 = (planeD3, drawSpaceW, drawSpaceH, gridArea, axesColor, gridLinesColor, displayGrid, displayAxes) => {
     planeD3.append("g")
         .attr("class", "x-axis-grid")
         .attr("transform", `translate(${0}, ${drawSpaceH})`)
@@ -14,22 +14,22 @@ export const drawGridD3 = (planeD3, drawSpaceW, drawSpaceH, gridArea, displayGri
     
     planeD3.selectAll("line")
     .attr("class", "x-grid-line")
-    .attr("stroke", "white")
+    .attr("stroke", gridLinesColor)
     .attr("stroke-width", `${displayGrid & 1}`)
     .attr("stroke-opacity", ".5");
 
     planeD3.select("line")
     .attr("class", "x-axis-line")
-    .attr("stroke", "yellow")
+    .attr("stroke", axesColor)
     .attr("stroke-width", `${displayAxes & 1}`)
     .attr("stroke-opacity", "1");
 }
 
-export const drawD3Object = (planeD3, objectType, zoomable, pX, pY, size, color) => {
+export const drawD3Object = (planeD3, objectType, pX, pY, size, color, zoomable, tangible) => {
     planeD3.append(objectType)
     .attr("cx", pX)
     .attr("cy", pY)
     .attr("r", size)
     .attr("fill", color)
-    .attr("class", zoomable? "zoomable" : "unzoomable");
+    .attr("class", `${zoomable? "zoomable": "unzoomable"} ${tangible? "tangible": "intangible"}`);
 }

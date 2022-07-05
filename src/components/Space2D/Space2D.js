@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 import PropTypes from "prop-types"
 import { drawGridD3, drawD3Object } from "./Space2DDraw"
 
-const Space2D = ({scaleMin, scaleMax, displayGrid, displayAxes}) => {
+const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, displayAxes}) => {
     const ref = useRef();
     const isMounted = useRef(false);
     const zoomHandler = d3.zoom().scaleExtent([scaleMin, scaleMax]);
@@ -33,15 +33,16 @@ const Space2D = ({scaleMin, scaleMax, displayGrid, displayAxes}) => {
         .on("dblclick.zoom", null)
         .append("g");
 
-        drawGridD3(currentD3, currentRef.width.animVal.value, currentRef.height.animVal.value, 50, displayGrid, displayAxes);
-        drawD3Object(currentD3, "circle", true, 500, 500, 100, "blue");
-        drawD3Object(currentD3, "circle", true, 500, 500, 50, "red");
+        drawGridD3(currentD3, currentRef.width.animVal.value, currentRef.height.animVal.value, 50, axesColor, gridLinesColor, displayGrid, displayAxes);
+        drawD3Object(currentD3, "circle", 500, 500, 100, "blue", true, false);
+        drawD3Object(currentD3, "circle", 500, 500, 50, "red", true, false);
+
         currentRef.addEventListener("click", (e) => {
             const zoomable = Math.floor(Math.random() * 2) === 0? false: true;
-            drawD3Object(currentD3, "circle", zoomable, (e.offsetX - transform.x) / transform.k, (e.offsetY - transform.y) / transform.k, 5 / transform.k, "red");
+            drawD3Object(currentD3, "circle", (e.offsetX - transform.x) / transform.k, (e.offsetY - transform.y) / transform.k, 5 / transform.k, "red", zoomable, false);
         });
 
-    }, [zoomHandler, displayGrid, displayAxes]);
+    }, [zoomHandler, axesColor, gridLinesColor, displayGrid, displayAxes]);
 
     return (
         <svg className="space-2d-container" ref={ref}></svg>
@@ -51,6 +52,8 @@ const Space2D = ({scaleMin, scaleMax, displayGrid, displayAxes}) => {
 Space2D.defaultProps = {
     scaleMin: 0.001, 
     scaleMax: 10, 
+    axesColor: "yellow", 
+    gridLinesColor: "white", 
     displayGrid: true, 
     displayAxes: true, 
 }
@@ -58,6 +61,8 @@ Space2D.defaultProps = {
 Space2D.propTypes = {
     scaleMin: PropTypes.number.isRequired, 
     scaleMax: PropTypes.number.isRequired, 
+    axesColor: PropTypes.string.isRequired, 
+    gridLinesColor: PropTypes.string.isRequired, 
     displayGrid: PropTypes.bool.isRequired, 
     displayAxes: PropTypes.bool.isRequired, 
 }
