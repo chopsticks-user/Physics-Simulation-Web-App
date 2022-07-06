@@ -1,12 +1,9 @@
-import * as d3 from "d3"
 import { useEffect, useRef } from 'react'
 import PropTypes from "prop-types"
-import { drawGridD3, drawD3Object } from "./Space2DDraw"
 
 const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, displayAxes}) => {
     const ref = useRef();
     const isMounted = useRef(false);
-    const zoomHandler = d3.zoom().scaleExtent([scaleMin, scaleMax]);
     
     useEffect(() => {
         if(!isMounted.current) {
@@ -17,35 +14,13 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         const currentRef = ref.current;
         let transform = {x: 0, y: 0, k: 1};
 
-        const currentD3 = d3.select(ref.current)
-        .call(zoomHandler.on("zoom", () => {
-            transform = {
-                x: d3.zoomTransform(currentD3.node()).x, 
-                y: d3.zoomTransform(currentD3.node()).y, 
-                k: d3.zoomTransform(currentD3.node()).k
-            }
-            currentD3.attr("transform", `translate(${transform.x}, ${transform.y}) scale(${transform.k})`);
-            
-            currentD3.selectAll("circle")
-            .selectAll(".unzoomable")
-            .attr("r", 5 / transform.k);
-        }))
-        .on("dblclick.zoom", null)
-        .append("g");
+        
 
-        drawGridD3(currentD3, currentRef.width.animVal.value, currentRef.height.animVal.value, 50, axesColor, gridLinesColor, displayGrid, displayAxes);
-        drawD3Object(currentD3, "circle", 500, 500, 100, "blue", true, false);
-        drawD3Object(currentD3, "circle", 500, 500, 50, "red", true, false);
-
-        currentRef.addEventListener("click", (e) => {
-            const zoomable = Math.floor(Math.random() * 2) === 0? false: true;
-            drawD3Object(currentD3, "circle", (e.offsetX - transform.x) / transform.k, (e.offsetY - transform.y) / transform.k, 5 / transform.k, "red", zoomable, false);
-        });
-
-    }, [zoomHandler, axesColor, gridLinesColor, displayGrid, displayAxes]);
+    }, [axesColor, gridLinesColor, displayGrid, displayAxes]);
 
     return (
         <svg className="space-2d-container" ref={ref}></svg>
+        
     );
 }
 
