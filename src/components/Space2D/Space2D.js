@@ -20,6 +20,8 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         const container = document.querySelector(".space-2d-container");
         const w = container.clientWidth;
         const h = container.clientHeight;
+        let eventStart = false;
+        let eventPause = false;
         
         const camera = new THREE.OrthographicCamera(-w / 2, w / 2, h / 2, -h / 2);
         const gridScene = new THREE.Scene();
@@ -42,8 +44,17 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
             gridScene.add(newHorizontalGridLine);
         }
 
-        container.addEventListener("click", (e) => {
+        container.addEventListener("click", () => {
             displayGrid = !displayGrid;
+        });
+
+        container.addEventListener("wheel", () => {
+            if (eventStart) {
+                eventPause = !eventPause;
+            }
+            else {
+                eventStart = true;
+            }
         });
 
         const objectScene = new THREE.Scene();
@@ -52,19 +63,21 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         objectScene.add(object);
 
         const animation = (time) => {
-            console.log(object.position);
             if (displayGrid) {
                 renderer.render(gridScene, camera);
             }
-
-            const shortOutOfScene = (px, py) => {
+            
+            if (!eventStart) return;
+            const _outOfScene = (px, py) => {
                 return outOfScene(px, py, 0, 0, Math.floor(w / 2));
             }
 
             renderer.clearDepth();
-            if (!shortOutOfScene(object.position.x, object.position.y)) {
-                object.position.x += 1;
-                object.position.y -= 1;
+            if (!_outOfScene(object.position.x, object.position.y)) {
+                if (!eventPause) {
+                    object.position.x += 1;
+                    object.position.y -= 1;
+                }
                 renderer.render(objectScene, camera);
             }
         }
