@@ -4,6 +4,11 @@ import * as THREE from "three"
 
 const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, displayAxes}) => {
     const isMounted = useRef(false);
+
+    const outOfScene = (px, py, ox, oy, margin) => {
+        if ((px > ox + margin || px < ox - margin) && (py > oy + margin || py < oy - margin)) return true;
+        return false;
+    }
     
     useEffect(() => {
         if(!isMounted.current) {
@@ -15,7 +20,6 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         const container = document.querySelector(".space-2d-container");
         const w = container.clientWidth;
         const h = container.clientHeight;
-        let showGrid = true;
         
         const camera = new THREE.OrthographicCamera(-w / 2, w / 2, h / 2, -h / 2);
         const gridScene = new THREE.Scene();
@@ -39,7 +43,7 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         }
 
         container.addEventListener("click", (e) => {
-            showGrid = !showGrid;
+            displayGrid = !displayGrid;
         });
 
         const objectScene = new THREE.Scene();
@@ -48,17 +52,21 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         objectScene.add(object);
 
         const animation = (time) => {
-            object.position.x += Math.random() - 0.51;
-            object.position.y -= Math.random() - 0.49;
-
-            object.rotation.x = -time/10000;
-            object.rotation.y = time/10000;
-
-            if (showGrid) {
+            console.log(object.position);
+            if (displayGrid) {
                 renderer.render(gridScene, camera);
             }
+
+            const shortOutOfScene = (px, py) => {
+                return outOfScene(px, py, 0, 0, Math.floor(w / 2));
+            }
+
             renderer.clearDepth();
-            renderer.render(objectScene, camera);
+            if (!shortOutOfScene(object.position.x, object.position.y)) {
+                object.position.x += 1;
+                object.position.y -= 1;
+                renderer.render(objectScene, camera);
+            }
         }
 
         const renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -66,7 +74,7 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         renderer.autoClear = false;
         container.append(renderer.domElement);
         renderer.setAnimationLoop( animation );
-    }, [axesColor, gridLinesColor]);
+    }, [axesColor, gridLinesColor, displayGrid]);
 
     return (
         <div className="space-2d-container"></div>
