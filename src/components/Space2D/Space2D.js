@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
 import PropTypes from "prop-types"
+import * as THREE from "three"
 
 const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, displayAxes}) => {
-    const ref = useRef();
     const isMounted = useRef(false);
     
     useEffect(() => {
@@ -10,16 +10,55 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
             isMounted.current = true;
             return;
         }
-        
-        const currentRef = ref.current;
-        let transform = {x: 0, y: 0, k: 1};
 
+        // let transform = {x: 0, y: 0, k: 1};
+        const container = document.querySelector(".space-2d-container");
+        const w = container.clientWidth;
+        const h = container.clientHeight;
         
+        const camera = new THREE.OrthographicCamera(-w / 2, w / 2, h / 2, -h / 2);
+        const scene = new THREE.Scene();
 
-    }, [axesColor, gridLinesColor, displayGrid, displayAxes]);
+        const geometry = new THREE.PlaneGeometry(100, 100);
+        const material = new THREE.LineBasicMaterial({color: "red" });
+        const mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
+
+        const lgeometry = new THREE.PlaneGeometry(100, 100);
+        const lmaterial = new THREE.LineBasicMaterial({color: "white" });
+        const lmesh = new THREE.Mesh( lgeometry, lmaterial );
+        scene.add( lmesh );
+
+        const ggeometry = new THREE.PlaneGeometry(100, 100);
+        const gmaterial = new THREE.LineBasicMaterial({color: "white" });
+        const gmesh = new THREE.Mesh( ggeometry, gmaterial );
+        scene.add( gmesh );
+
+        function animation( time ) {
+            mesh.rotation.y = 1;
+            lmesh.rotation.y = 1;
+
+            mesh.position.x += 1;
+            lmesh.position.x -= 1;
+            
+            if (mesh.position.x > w/2) {
+                mesh.position.x = -w/2;
+            }
+            if (lmesh.position.x < -w/2) {
+                lmesh.position.x = w/2;
+            }
+            renderer.render( scene, camera );
+        }
+
+        const renderer = new THREE.WebGLRenderer( { antialias: true } );
+        renderer.setSize( container.clientWidth, container.clientHeight );
+        renderer.setAnimationLoop( animation );
+        container.append( renderer.domElement );
+        renderer.render(scene, camera);
+    }, []);
 
     return (
-        <svg className="space-2d-container" ref={ref}></svg>
+        <div className="space-2d-container"></div>
         
     );
 }
