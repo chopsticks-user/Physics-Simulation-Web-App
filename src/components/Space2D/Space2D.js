@@ -15,74 +15,57 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         const container = document.querySelector(".space-2d-container");
         const w = container.clientWidth;
         const h = container.clientHeight;
-        console.log(w, h);
+        let showGrid = true;
         
         const camera = new THREE.OrthographicCamera(-w / 2, w / 2, h / 2, -h / 2);
-        const scene = new THREE.Scene();
-
-        // const geometry = new THREE.PlaneGeometry(3, h);
-        // const material = new THREE.LineBasicMaterial({color: "red" });
-        // const mesh = new THREE.Mesh( geometry, material );
-        // scene.add( mesh );
-        // const llmesh = new THREE.Mesh( geometry, material );
-        // scene.add( llmesh );
-
-        // const lgeometry = new THREE.PlaneGeometry(3, h);
-        // const lmaterial = new THREE.LineBasicMaterial({color: "white" });
-        // const lmesh = new THREE.Mesh( lgeometry, lmaterial );
-        // scene.add( lmesh );
-        // lmesh.position.x = 100;
-
-        // const ggeometry = new THREE.PlaneGeometry(2, h);
-        // const gmaterial = new THREE.LineBasicMaterial({color: "white" });
-        // const gmesh = new THREE.Mesh( ggeometry, gmaterial );
-        // scene.add( gmesh );
-
-        // container.addEventListener("mousewheel", () => {
-        //     mesh.position.x += 1;
-        // });
-
-        // function animation( time ) {
-        //     mesh.rotation.y = 1;
-        //     lmesh.rotation.y = 1;
-        //     llmesh.rotation.y = 1;
-
-        //     // mesh.position.x += 1/2;
-        //     // lmesh.position.x -= 1/2;
-
-        //     if (mesh.position.x > w/2) {
-        //         mesh.position.x = -w/2;
-        //     }
-        //     if (lmesh.position.x < -w/2) {
-        //         lmesh.position.x = w/2;
-        //     }
-        //     renderer.render( scene, camera );
-        // }
+        const gridScene = new THREE.Scene();
         
         const gridSize = 50;
-        
-        for (let i = 0; i < w / gridSize; i++) {
-            const newVerticalGridLine = new THREE.Mesh(new THREE.PlaneGeometry(i === 0 ? 4 : 2, h), new THREE.LineBasicMaterial({color: i === 0 ? axesColor : gridLinesColor}));
-            newVerticalGridLine.position.x = -w / 2 + 0 + i * gridSize;
+        const margin = {top: 25, left: 50};
+        const textMargin = {top: 3, left: 5};
+        for (let i = 0; i < w / gridSize - 1; i++) {
+            const newVerticalGridLine = new THREE.Mesh(new THREE.PlaneGeometry(2, h), new THREE.LineBasicMaterial({color: gridLinesColor}));
+            newVerticalGridLine.position.x = Math.floor(-w / 2) + margin.left + (i) * gridSize;
+            newVerticalGridLine.position.y -= margin.top;
             newVerticalGridLine.rotation.y = 1;
-            scene.add(newVerticalGridLine);
+            gridScene.add(newVerticalGridLine);
         }
         for (let i = 0; i < h / gridSize; i++) {
-            const newHorizontalGridLine = new THREE.Mesh(new THREE.PlaneGeometry(w, i === 0 ? 4 : 2), new THREE.LineBasicMaterial({color: i === 0 ? axesColor : gridLinesColor}));
-            newHorizontalGridLine.position.y = -h / 2 + 1 + i * gridSize;
+            const newHorizontalGridLine = new THREE.Mesh(new THREE.PlaneGeometry(w, 2), new THREE.LineBasicMaterial({color: gridLinesColor}));
+            newHorizontalGridLine.position.x += margin.left;
+            newHorizontalGridLine.position.y = Math.floor(-h / 2) + margin.top + h % gridSize + (i) * gridSize;
             newHorizontalGridLine.rotation.x = 1;
-            scene.add(newHorizontalGridLine);
+            gridScene.add(newHorizontalGridLine);
         }
 
-        const animation = () => {
-            renderer.render(scene, camera);
+        container.addEventListener("click", (e) => {
+            showGrid = !showGrid;
+        });
+
+        const objectScene = new THREE.Scene();
+        const object = new THREE.Mesh(new THREE.PlaneGeometry(340, 279), new THREE.LineBasicMaterial({color: "red"}));
+        object.rotation.x = 1;
+        objectScene.add(object);
+
+        const animation = (time) => {
+            object.position.x += Math.random() - 0.51;
+            object.position.y -= Math.random() - 0.49;
+
+            object.rotation.x = -time/10000;
+            object.rotation.y = time/10000;
+
+            if (showGrid) {
+                renderer.render(gridScene, camera);
+            }
+            renderer.clearDepth();
+            renderer.render(objectScene, camera);
         }
 
         const renderer = new THREE.WebGLRenderer( { antialias: true } );
         renderer.setSize( container.clientWidth, container.clientHeight );
+        renderer.autoClear = false;
+        container.append(renderer.domElement);
         renderer.setAnimationLoop( animation );
-        container.append( renderer.domElement );
-        renderer.render(scene, camera);
     }, [axesColor, gridLinesColor]);
 
     return (
@@ -94,7 +77,7 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
 Space2D.defaultProps = {
     scaleMin: 0.001, 
     scaleMax: 10, 
-    axesColor: "yellow", 
+    axesColor: "red", 
     gridLinesColor: "white", 
     displayGrid: true, 
     displayAxes: true, 
