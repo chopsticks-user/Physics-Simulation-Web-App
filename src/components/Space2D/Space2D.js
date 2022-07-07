@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import PropTypes from "prop-types"
 import * as THREE from "three"
+import { grid2D, camera2D } from "./Helper"
 
 const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, displayAxes}) => {
     const isMounted = useRef(false);
@@ -16,36 +17,18 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
             return;
         }
 
-        // let transform = {x: 0, y: 0, k: 1};
         const container = document.querySelector(".space-2d-container");
         const w = container.clientWidth;
         const h = container.clientHeight;
         let eventStart = false;
         let eventPause = false;
         
-        const camera = new THREE.OrthographicCamera(-w / 2, w / 2, h / 2, -h / 2);
-        const gridScene = new THREE.Scene();
-        
-        const gridSize = 50;
-        const margin = {top: 25, left: 50};
-        const textMargin = {top: 3, left: 5};
-        for (let i = 0; i < w / gridSize - 1; i++) {
-            const newVerticalGridLine = new THREE.Mesh(new THREE.PlaneGeometry(2, h), new THREE.LineBasicMaterial({color: gridLinesColor}));
-            newVerticalGridLine.position.x = Math.floor(-w / 2) + margin.left + (i) * gridSize;
-            newVerticalGridLine.position.y -= margin.top;
-            newVerticalGridLine.rotation.y = 1;
-            gridScene.add(newVerticalGridLine);
-        }
-        for (let i = 0; i < h / gridSize; i++) {
-            const newHorizontalGridLine = new THREE.Mesh(new THREE.PlaneGeometry(w, 2), new THREE.LineBasicMaterial({color: gridLinesColor}));
-            newHorizontalGridLine.position.x += margin.left;
-            newHorizontalGridLine.position.y = Math.floor(-h / 2) + margin.top + h % gridSize + (i) * gridSize;
-            newHorizontalGridLine.rotation.x = 1;
-            gridScene.add(newHorizontalGridLine);
-        }
+        const camera = camera2D(w, h);
+        const gridScene = grid2D(50, w, h, gridLinesColor);
 
         container.addEventListener("click", () => {
             displayGrid = !displayGrid;
+            console.log(displayGrid);
         });
 
         container.addEventListener("wheel", () => {
@@ -62,22 +45,22 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         object.rotation.x = 1;
         objectScene.add(object);
 
-        const animation = (time) => {
+        const animationHandler = () => {
             if (displayGrid) {
                 renderer.render(gridScene, camera);
             }
-            
+
             if (!eventStart) return;
             const _outOfScene = (px, py) => {
                 return outOfScene(px, py, 0, 0, Math.floor(w / 2));
             }
 
-            renderer.clearDepth();
             if (!_outOfScene(object.position.x, object.position.y)) {
                 if (!eventPause) {
                     object.position.x += 1;
                     object.position.y -= 1;
                 }
+                renderer.clearDepth();
                 renderer.render(objectScene, camera);
             }
         }
@@ -85,8 +68,9 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         const renderer = new THREE.WebGLRenderer( { antialias: true } );
         renderer.setSize( container.clientWidth, container.clientHeight );
         renderer.autoClear = false;
+        renderer.setAnimationLoop(animationHandler);
         container.append(renderer.domElement);
-        renderer.setAnimationLoop( animation );
+
     }, [axesColor, gridLinesColor, displayGrid]);
 
     return (
