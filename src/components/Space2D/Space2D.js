@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react'
+import { grid2D, camera2D } from "./Helper"
 import PropTypes from "prop-types"
 import * as THREE from "three"
-import { grid2D, camera2D } from "./Helper"
 
 const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, displayAxes}) => {
+    const ref = useRef();
     const isMounted = useRef(false);
 
     const outOfScene = (px, py, ox, oy, margin) => {
@@ -17,20 +18,20 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
             return;
         }
 
-        const container = document.querySelector(".space-2d-container");
-        const w = container.clientWidth;
-        const h = container.clientHeight;
+        const currentRef = ref.current;
+        const w = currentRef.clientWidth;
+        const h = currentRef.clientHeight;
         let eventStart = false;
         let eventPause = false;
         
         const camera = camera2D(w, h);
         const gridScene = grid2D(50, w, h, gridLinesColor);
 
-        container.addEventListener("click", () => {
+        currentRef.addEventListener("click", () => {
             displayGrid = !displayGrid;
         });
 
-        container.addEventListener("wheel", () => {
+        currentRef.addEventListener("wheel", () => {
             eventStart ? eventPause = !eventPause : eventStart = true;
         });
 
@@ -58,15 +59,38 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         }
 
         const renderer = new THREE.WebGLRenderer( { antialias: true } );
-        renderer.setSize( container.clientWidth, container.clientHeight );
+        renderer.setSize( w, h );
         renderer.autoClear = false;
         renderer.setAnimationLoop(animationHandler);
-        container.append(renderer.domElement);
+        currentRef.append(renderer.domElement);
 
     }, [axesColor, gridLinesColor, displayGrid]);
 
     return (
-        <div className="space-2d-container"></div>
+        <div className="space-2d-container" ref={ref}>
+            <div style={{
+                "height": "25px", 
+                "color": "white", 
+                "position": "absolute", 
+                "font-size": "12px", 
+                "display": "flex", 
+                "alignItems": "center", 
+                "width": "calc(100% - 60px)", 
+                "right": "0px", 
+            }}>
+                <ul style={{
+                    "listStyle": "none", 
+                    "display": "inline-flex", 
+                    "columnGap": "35px", 
+                    "left": "50px", 
+                }}>
+                    <li>0.01</li>
+                    <li>0.02</li>
+                    <li>0.03</li>
+                    <li>0.04</li>
+                </ul>
+            </div>
+        </div>
         
     );
 }
