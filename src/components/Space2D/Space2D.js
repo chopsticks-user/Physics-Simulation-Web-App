@@ -34,8 +34,8 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         currentRef.appendChild(renderer.domElement);
         const orbit = new OrbitControls(camera, renderer.domElement);
         orbit.enableRotate = false;
-        orbit.enableZoom = false;
-        camera.position.set(0, 12, 0);
+        orbit.enableZoom = true;
+        camera.position.set(0, 10, 0);
         orbit.update();
         
         const plane = new t3.Mesh(
@@ -66,18 +66,20 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         // scene.add(xAxis, yAxis, zAxis);
 
         const animation = () => {
-            if (camera.position.y > 18 || camera.position.y < 8) {
-                camera.position.set(camera.position.x, 12, camera.position.z);
-                console.log(camera.position);
+            if (camera.position.y > 20 || camera.position.y < 5) {
+                camera.position.y = 10;
+                orbit.target.z = camera.position.z;
             }
             renderer.render(scene, camera);
         }
         renderer.setAnimationLoop(animation);
 
         currentRef.addEventListener("dblclick", (e) => {
-            orbit.enableZoom = true;
+            console.log(camera.position);
+            console.log(orbit.target);
+            // orbit.enableZoom = true;
             currentRef.addEventListener("mousedown", () => {
-                orbit.enableZoom = false;
+                // orbit.enableZoom = false;
             });
         });
 
