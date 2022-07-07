@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
 import Space2D from "../Space2D"
+import Coordinate from "../Coordinate"
 
 const WorkSpace = ({backgroundColor}) => {
   return (
