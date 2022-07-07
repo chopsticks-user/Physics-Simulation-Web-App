@@ -28,16 +28,10 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
 
         container.addEventListener("click", () => {
             displayGrid = !displayGrid;
-            console.log(displayGrid);
         });
 
         container.addEventListener("wheel", () => {
-            if (eventStart) {
-                eventPause = !eventPause;
-            }
-            else {
-                eventStart = true;
-            }
+            eventStart ? eventPause = !eventPause : eventStart = true;
         });
 
         const objectScene = new THREE.Scene();
@@ -46,11 +40,9 @@ const Space2D = ({scaleMin, scaleMax, axesColor, gridLinesColor, displayGrid, di
         objectScene.add(object);
 
         const animationHandler = () => {
-            if (displayGrid) {
-                renderer.render(gridScene, camera);
-            }
-
+            displayGrid ? renderer.render(gridScene, camera) : renderer.clear();
             if (!eventStart) return;
+
             const _outOfScene = (px, py) => {
                 return outOfScene(px, py, 0, 0, Math.floor(w / 2));
             }
