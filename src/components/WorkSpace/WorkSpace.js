@@ -1,14 +1,15 @@
 import PropTypes from "prop-types"
 import Space2D from "../Space2D"
-import Coordinate from "../Coordinate"
+import CoordX from "../Coordinate/CoordX"
+import CoordY from "../Coordinate/CoordY"
+import Unit from "../Coordinate/Unit"
 
 const WorkSpace = ({backgroundColor}) => {
   return (
-    <div className="work-space-container" 
-         style={{
-          backgroundColor: backgroundColor, 
-         }} 
-    >
+    <div className="work-space-container">
+      <CoordX/>
+      <CoordY/>
+      <Unit/>
       <Space2D/>
     </div>
   )

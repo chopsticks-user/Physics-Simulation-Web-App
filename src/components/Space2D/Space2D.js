@@ -34,14 +34,15 @@ const Space2D = ({axesColor, gridLinesColor, displayGrid, displayAxes}) => {
     return (
         <div className="space-2d-container" ref={ref}>
             {/* <div style={{
-                "height": "25px", 
+                "height": "20px", 
                 "color": "white", 
-                "position": "absolute", 
-                "font-size": "12px", 
+                "position": "relative", 
+                "fontSize": "12px", 
                 "display": "flex", 
                 "alignItems": "center", 
                 "width": "calc(100% - 60px)", 
-                "right": "0px", 
+                "left": "38px",  
+                "overflow": "hidden"
             }}>
                 <ul style={{
                     "listStyle": "none", 
@@ -53,7 +54,51 @@ const Space2D = ({axesColor, gridLinesColor, displayGrid, displayAxes}) => {
                     <li>0.02</li>
                     <li>0.03</li>
                     <li>0.04</li>
+                    <li>0.01</li>
+                    <li>0.02</li>
+                    <li>0.03</li>
+                    <li>0.04</li>
+                    <li>0.01</li>
+                    <li>0.02</li>
+                    <li>0.03</li>
+                    <li>0.04</li>
+                    <li>0.01</li>
+                    <li>0.02</li>
+                    <li>0.03</li>
+                    <li>0.04</li>
+                    <li>0.01</li>
+                    <li>0.02</li>
+                    <li>0.03</li>
+                    <li>0.04</li>
+                    <li>0.01</li>
+                    <li>0.02</li>
+                    <li>0.03</li>
+                    <li>0.04</li>
+                    <li>0.01</li>
+                    <li>0.02</li>
+                    <li>0.03</li>
+                    <li>0.04</li>
+                    <li>0.01</li>
+                    <li>0.02</li>
+                    <li>0.03</li>
+                    <li>0.04</li>
+                    <li>0.01</li>
+                    <li>0.02</li>
+                    <li>0.03</li>
+                    <li>0.04</li>
                 </ul>
+            </div>
+            <div style={{
+                "width": "30px", 
+                "color": "white", 
+                "position": "relative", 
+                "fontSize": "12px", 
+                "display": "flex", 
+                "alignItems": "center", 
+                "height": "calc(100% - 60px)",  
+                "overflow": "hidden"
+            }}>
+
             </div> */}
         </div>
         

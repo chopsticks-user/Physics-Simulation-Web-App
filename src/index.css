@@ -6,9 +6,12 @@
   --body-padding: 5px;
   --components-border: 0px dashed red;
   --components-border-radius: 5px;
-  --header-background-color: white;
+  --header-background-color: black;
   --header-height-to-body: 5%;
   --plane-background-color: black;
+  --work-space-font-size: 10px;
+  --work-space-text-color: white;
+  --work-space-bar-size: 35px; 
 }
 
 body {
