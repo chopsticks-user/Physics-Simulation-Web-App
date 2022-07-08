@@ -2,7 +2,7 @@
 
 const CoordX = () => {
   return (
-    <div className="coord-container--x">0.01</div>
+    <div className="coord-container--x">0.00</div>
   )
 }
 

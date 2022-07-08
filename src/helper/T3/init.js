@@ -1,7 +1,7 @@
 import * as t3 from "three"
 import { OrbitControls} from "three/examples/jsm/controls/OrbitControls"
 
-export const init2D = (reactRef) => {
+export const init2D = (reactRef, axesColor, gridLinesColor) => {
     const camera = new t3.PerspectiveCamera(75, reactRef.clientWidth / reactRef.clientHeight, 0.1, 1000);
     const gridScene = new t3.Scene();
     const renderer = new t3.WebGLRenderer();
@@ -13,7 +13,7 @@ export const init2D = (reactRef) => {
     orbit.update();
     
     const plane = new t3.Mesh(
-        new t3.PlaneGeometry(314159, 314159), 
+        new t3.PlaneGeometry(31416, 31416), 
         new t3.MeshBasicMaterial({
             side: t3.DoubleSide, 
             visible: false
@@ -21,7 +21,8 @@ export const init2D = (reactRef) => {
     );
     gridScene.add(plane);
 
-    const grid = new t3.GridHelper(314159, 314159);
+    const grid = new t3.GridHelper(31416, 31416, axesColor, gridLinesColor);
     gridScene.add(grid);
+    console.log(grid);
     return {gridScene, renderer, camera, orbit};
 }

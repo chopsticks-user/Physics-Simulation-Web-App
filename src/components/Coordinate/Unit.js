@@ -3,8 +3,8 @@
 const Unit = () => {
   return (
     <div className="unit-container">
-        <p>10-43</p>
-        <p> ly</p>
+        <p>E0</p>
+        <p>m</p>
     </div>
   )
 }
