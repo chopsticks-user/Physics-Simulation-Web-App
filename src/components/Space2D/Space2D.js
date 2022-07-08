@@ -35,9 +35,18 @@ const Space2D = ({axesColor, gridLinesColor, displayAxes, displayGrid}) => {
             let countHor = Math.floor(cameraHeight * 2 + 1);
             if (countHor % 2 === 0) countHor--;
 
-            let countVer = Math.floor(cameraHeight * apsectRatio * 2 + 1);
-            if (countVer % 2 === 0) countVer--;
-            
+            let countVer = cameraHeight * apsectRatio * 2 + 1;
+            let flooredCV = Math.floor(countVer)
+            if (flooredCV % 2 == 0) {
+                if (countVer - flooredCV > 0.5)
+                    countVer = Math.ceil(countVer);
+                else 
+                    countVer = flooredCV - 1;
+            }
+            else {
+                countVer = flooredCV;
+            }
+
             return {countHor, countVer};
         }
 
