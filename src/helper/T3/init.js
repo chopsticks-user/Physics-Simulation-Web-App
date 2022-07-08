@@ -23,6 +23,5 @@ export const init2D = (reactRef, axesColor, gridLinesColor) => {
 
     const grid = new t3.GridHelper(31416, 31416, axesColor, gridLinesColor);
     gridScene.add(grid);
-    console.log(grid);
     return {gridScene, renderer, camera, orbit};
 }

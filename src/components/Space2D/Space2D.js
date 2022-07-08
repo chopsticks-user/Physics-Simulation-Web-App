@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import PropTypes from "prop-types"
 import { init2D } from "../../helper/T3/init"
+import * as t3 from "three"
 
 const Space2D = ({axesColor, gridLinesColor, displayAxes, displayGrid}) => {
     const ref = useRef();
@@ -24,9 +25,12 @@ const Space2D = ({axesColor, gridLinesColor, displayAxes, displayGrid}) => {
         }
         renderer.setAnimationLoop(animation);
 
-        currentRef.addEventListener("dblclick", () => {
-            console.log(camera.position);
-            console.log(orbit.target);
+        currentRef.addEventListener("dblclick", (e) => {
+            // console.log(camera.position);
+            // console.log(orbit.target);
+            console.log(e.clientX, e.clientY);
+            console.log(currentRef.clientWidth, currentRef.clientHeight);
+            console.log(renderer);
         });
 
     }, [axesColor, gridLinesColor]);

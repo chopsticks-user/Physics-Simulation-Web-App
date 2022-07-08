@@ -1,6 +1,6 @@
-.coord-container--x {grid-area: top-bar;}
-.coord-container--y {grid-area: left-bar;}
-.unit-container {grid-area: unit;}
+#ccx {grid-area: top-bar;}
+#ccy {grid-area: left-bar;}
+#ccu {grid-area: unit;}
 .space-2d-container {grid-area: space;}
 
 .work-space-container {

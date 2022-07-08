@@ -1,19 +1,12 @@
-.coord-container--x {
+.coord-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: calc(100% - var(--components-border-radius));
+    width: calc(100% - var(--components-border-radius));
 }
 
-.coord-container--y {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.unit-container {
-    display: flex;
+#ccu {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     font-size: 12px;
 }
