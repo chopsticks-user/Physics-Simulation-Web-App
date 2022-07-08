@@ -12,4 +12,4 @@ Coordinate.propTypes = {
     
 }
 
-export default Coordinate
+export default Coordinate;

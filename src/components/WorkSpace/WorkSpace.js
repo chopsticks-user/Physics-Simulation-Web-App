@@ -7,7 +7,7 @@ const WorkSpace = ({backgroundColor}) => {
     <div className="work-space-container" 
          style={{
           backgroundColor: backgroundColor, 
-         }}
+         }} 
     >
       <Space2D/>
     </div>
@@ -22,4 +22,4 @@ WorkSpace.propTypes = {
     backgroundColor: PropTypes.string.isRequired, 
 }
 
-export default WorkSpace
+export default WorkSpace;
