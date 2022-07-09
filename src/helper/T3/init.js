@@ -29,3 +29,27 @@ export const init2D = (reactRef, axesColor, gridLinesColor) => {
     gridScene.add(grid);
     return {gridScene, renderer, camera, orbit};
 }
+
+// h/(ch*2)/tan(vfov/2) = gridSize
+export const initGridLinesAttr = (cameraHeight, width, height) => {
+    let apsectRatio = width / height;
+    if (Math.floor(cameraHeight + 0.1) > cameraHeight) {
+        cameraHeight = Math.floor(cameraHeight + 0.1);
+    }
+    let countHor = Math.floor(cameraHeight * 2 + 1);
+    if (countHor % 2 === 0) 
+        countHor--;
+
+    let countVer = cameraHeight * apsectRatio * 2 + 1;
+    let flooredCV = Math.floor(countVer)
+    if (flooredCV % 2 === 0) {
+        if (countVer - flooredCV > 0.5)
+            countVer = Math.ceil(countVer);
+        else 
+            countVer = flooredCV - 1;
+    }
+    else
+        countVer = flooredCV;
+
+    return {countHor, countVer};
+}
