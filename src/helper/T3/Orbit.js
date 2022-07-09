@@ -10,3 +10,6 @@ export class Orbit2D {
         this.t3Component.update();
     }
 }
+
+
+export default Orbit2D;

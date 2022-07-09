@@ -1,6 +1,6 @@
 import * as t3 from "three"
 
-export class Camera2D {
+class Camera2D {
     constructor(spaceWidth, spaceHeight, near = 0.1, far = 1000, fov = 91, 
         aspectRatioLimit = 2.3, defaultViewHeight = 6, scaleResetLimit = 2) {
 
@@ -20,17 +20,44 @@ export class Camera2D {
         }
         this.currentScale = 1;
         this.scaleResetLimit = scaleResetLimit;
-        this.viewHeight = {default: dhv, min: dhv / 2, max: dhv * 2};
-        this.t3Component.position.y = this.viewHeight.max;
+        this.viewAttr = {default: dhv, min: dhv / 2, max: dhv * 2};
+        this.setPositionZ(this.viewAttr.max);
     }
 
-    updateViewHeight = () => {
-        if (this.t3Component.position.y > this.viewHeight.max
-            || this.t3Component.position.y < this.viewHeight.min) {
-                this.currentScale *= this.t3Component.position.y / this.viewHeight.default
-                this.t3Component.position.y = this.viewHeight.default;
+    updateViewAttr = () => {
+        const position = this.getPosition();
+        if (position.z > this.viewAttr.max
+            || position.z < this.viewAttr.min) {
+                this.currentScale *= position.z / this.viewAttr.default
+                this.setPositionZ(this.viewAttr.default);
                 return true;
             }
         return false;
     }
+
+    getPosition = () => {
+        return {
+            x: this.t3Component.position.x, 
+            y: -this.t3Component.position.z, 
+            z: this.t3Component.position.y
+        }
+    }
+
+    setPosition = (x, y, z) => {
+        this.t3Component.position.set(x, -z, y);
+    }
+
+    setPositionX = (x) => {
+        this.t3Component.position.x = x;
+    }
+
+    setPositionY = (y) => {
+        this.t3Component.position.z = -y;
+    }
+
+    setPositionZ = (z) => {
+        this.t3Component.position.y = z;
+    }
 }
+
+export default Camera2D;

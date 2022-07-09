@@ -1,10 +1,11 @@
 import { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
-import { Camera2D } from "../../helper/T3/Camera"
-import { Grid2D } from "../../helper/T3/Grid"
-import { Renderer2D } from "../../helper/T3/Renderer"
-import { Orbit2D } from "../../helper/T3/Orbit"
+// import Camera2D from "../../helper/T3/Camera"
+// import Grid2D from "../../helper/T3/Grid"
+// import Renderer2D from "../../helper/T3/Renderer"
+// import Orbit2D from "../../helper/T3/Orbit"
 import { initGridLinesAttr } from "../../helper/T3/init"
+import Space2DController from "../../helper/T3/SpaceController"
 
 const Space2D = ({axesColor, gridLinesColor, displayAxes, displayGrid}) => {
     const ref = useRef();
@@ -16,28 +17,32 @@ const Space2D = ({axesColor, gridLinesColor, displayAxes, displayGrid}) => {
             return;
         }
 
-        const currentRef = ref.current;
-        const camera = new Camera2D(currentRef.clientWidth, currentRef.clientHeight);
-        const renderer = new Renderer2D(currentRef.clientWidth, currentRef.clientHeight);
-        const grid = new Grid2D();
-        const orbit = new Orbit2D(camera, renderer);
-        currentRef.appendChild(renderer.t3Component.domElement);
+        let w = ref.current.clientWidth;
+        let h = ref.current.clientHeight;
 
-        const animation = () => {
-            if (camera.updateViewHeight()) {
-                orbit.t3Component.target.z = camera.t3Component.position.z;
-            }
-            renderer.t3Component.render(grid.t3Scene, camera.t3Component);
-        }
-        renderer.t3Component.setAnimationLoop(animation);
+        const controller = new Space2DController(ref.current);
 
-        currentRef.addEventListener("dblclick", (e) => {
-            console.log(currentRef.clientWidth, currentRef.clientHeight);
-            console.log(camera.t3Component.position.y);
-            console.log(initGridLinesAttr(camera.t3Component.position.y, 
-                currentRef.clientWidth, currentRef.clientHeight));
-            console.log(camera.currentScale);
-            console.log(orbit.t3Component);
+
+        // const camera = new Camera2D(w, h);
+        // const renderer = new Renderer2D(w, h);
+        // const grid = new Grid2D();
+        // const orbit = new Orbit2D(camera, renderer);
+        // ref.current.appendChild(renderer.t3Component.domElement);
+
+        // const animation = () => {
+        //     if (camera.updateViewAttr()) {
+        //         orbit.t3Component.target.z = camera.t3Component.position.z;
+        //     }
+        //     renderer.t3Component.render(grid.t3Scene, camera.t3Component);
+        // }
+        // renderer.t3Component.setAnimationLoop(animation);
+
+        ref.current.addEventListener("dblclick", (e) => {
+            console.log(w, h);
+            console.log(initGridLinesAttr(controller.camera.t3Component.position.y, w, h));
+            console.log(controller.camera.getPosition());
+            console.log(controller.camera.t3Component.position);
+            console.log(controller.grid.getUnitSizeToPixel(controller.camera));
         });
 
     }, [axesColor, gridLinesColor]);
