@@ -1,8 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import { init2D } from "../../helper/T3/init"
-// import * as t3 from "three"
 import { Camera2D } from "../../helper/T3/Camera"
+import { Grid2D } from "../../helper/T3/Grid"
+import { Renderer2D } from "../../helper/T3/Renderer"
+import { Orbit2D } from "../../helper/T3/Orbit"
 
 const Space2D = ({axesColor, gridLinesColor, displayAxes, displayGrid}) => {
     const ref = useRef();
@@ -15,23 +17,33 @@ const Space2D = ({axesColor, gridLinesColor, displayAxes, displayGrid}) => {
         }
 
         const currentRef = ref.current;
-        const myCam = new Camera2D(
-            currentRef.clientWidth, 
-            currentRef.clientHeight
-        );
-        const {gridScene, renderer, camera, orbit} = init2D(currentRef, axesColor, gridLinesColor);
+        const camera = new Camera2D(currentRef.clientWidth, currentRef.clientHeight);
+        const renderer = new Renderer2D(currentRef.clientWidth, currentRef.clientHeight);
+        const grid = new Grid2D();
+        const orbit = new Orbit2D(camera, renderer);
+        currentRef.appendChild(renderer.t3Component.domElement);
 
-        const animation = () => {
-            if (camera.position.y > 12 || camera.position.y < 3) {
-                camera.position.y = 6;
-                orbit.target.z = camera.position.z;
-            }
-            renderer.render(gridScene, camera);
-        }
-        renderer.setAnimationLoop(animation);
+        // const {gridScene, renderer, camera, orbit} = init2D(currentRef, axesColor, gridLinesColor);
+
+        // const animation = () => {
+        //     if (camera.position.y > 12 || camera.position.y < 3) {
+        //         camera.position.y = 6;
+        //         orbit.target.z = camera.position.z;
+        //     }
+        //     renderer.render(gridScene, camera);
+        // }
+        // renderer.setAnimationLoop(animation);
 
         // aspect ratio max < 2.3
         // h/(ch*2)/tan(vfov/2) = gridSize
+
+        const animation = () => {
+            if (camera.updateViewHeight()) {
+                orbit.t3Component.target.z = camera.t3Component.position.z;
+            }
+            renderer.t3Component.render(grid.t3Scene, camera.t3Component);
+        }
+        renderer.t3Component.setAnimationLoop(animation);
 
         const initGridLinesAttr = (cameraHeight, width, height) => {
             let apsectRatio = width / height;
@@ -58,10 +70,12 @@ const Space2D = ({axesColor, gridLinesColor, displayAxes, displayGrid}) => {
 
         currentRef.addEventListener("dblclick", (e) => {
             console.log(currentRef.clientWidth, currentRef.clientHeight);
-            console.log(camera.position.y);
-            console.log(initGridLinesAttr(camera.position.y, 
-                currentRef.clientWidth, currentRef.clientHeight));
-            console.log(myCam);
+            // console.log(camera.position.y);
+            // console.log(initGridLinesAttr(camera.position.y, 
+            //     currentRef.clientWidth, currentRef.clientHeight));
+            // console.log(myCam);
+            console.log(camera.currentScale);
+            console.log(orbit.t3Component);
         });
 
     }, [axesColor, gridLinesColor]);

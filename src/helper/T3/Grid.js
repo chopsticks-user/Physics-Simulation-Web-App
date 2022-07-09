@@ -2,7 +2,7 @@ import * as t3 from "three"
 import { t3Grid2DUnitToPixel } from "../Math2D/T3Convert2DToPixel";
 
 export class Grid2D {
-    constructor(width, height, axesColor = "red", lineColor = "#888888") {
+    constructor(width = 31416, height = 31416, axesColor = "red", lineColor = "#888888") {
         this.size = {width: width, height: height};
         this.axesColor = axesColor;
         this.lineColor = lineColor;

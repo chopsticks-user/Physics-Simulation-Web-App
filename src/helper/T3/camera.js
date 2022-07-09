@@ -2,7 +2,7 @@ import * as t3 from "three"
 
 export class Camera2D {
     constructor(spaceWidth, spaceHeight, near = 0.1, far = 1000, fov = 91, 
-        aspectRatioLimit = 2.3, initViewHeight = 12, scaleResetLimit = 2) {
+        aspectRatioLimit = 2.3, defaultViewHeight = 6, scaleResetLimit = 2) {
 
         this.obs = {width: spaceWidth, height: spaceHeight, near: near, far: far};
         this.aspectRatio = spaceWidth / spaceHeight;
@@ -14,21 +14,21 @@ export class Camera2D {
             near, 
             far
         );
-        let initVH = initViewHeight;
+        let dhv = defaultViewHeight;
         if (this.aspectRatio >= this.aspectRatioLimit) {
-            initVH *= 2;
+            dhv *= 2;
         }
         this.currentScale = 1;
         this.scaleResetLimit = scaleResetLimit;
-        this.viewHeight = {init: initVH, min: initVH / 3, max: initVH};
-        this.t3Component.position.y = initVH;
+        this.viewHeight = {default: dhv, min: dhv / 2, max: dhv * 2};
+        this.t3Component.position.y = this.viewHeight.max;
     }
 
     updateViewHeight = () => {
         if (this.t3Component.position.y > this.viewHeight.max
             || this.t3Component.position.y < this.viewHeight.min) {
-                this.currentScale *= this.t3Component.position.y / this.viewHeight.init
-                this.t3Component.position.y = this.viewHeight.init;
+                this.currentScale *= this.t3Component.position.y / this.viewHeight.default
+                this.t3Component.position.y = this.viewHeight.default;
                 return true;
             }
         return false;
