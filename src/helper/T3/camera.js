@@ -1,30 +1,34 @@
 import * as t3 from "three"
 
 export class Camera2D {
-    constructor(targetWidth, targetHeight, near = 0.1, far = 1000, fov = 91, 
-        aspectRatioLimit = 2.3, initViewHeight = 12, scaleLimit = 2) {
+    constructor(spaceWidth, spaceHeight, near = 0.1, far = 1000, fov = 91, 
+        aspectRatioLimit = 2.3, initViewHeight = 12, scaleResetLimit = 2) {
 
-        this.aspectRatio = targetWidth / targetHeight;
+        this.obs = {width: spaceWidth, height: spaceHeight, near: near, far: far};
+        this.aspectRatio = spaceWidth / spaceHeight;
         this.aspectRatioLimit = aspectRatioLimit;
         this.fov = {hor: fov * this.aspectRatio, ver: fov};
-        this.t3Attr = new t3.PerspectiveCamera(
+        this.t3Component = new t3.PerspectiveCamera(
             this.fov.ver, 
             this.aspectRatio, 
             near, 
             far
         );
+        let initVH = initViewHeight;
         if (this.aspectRatio >= this.aspectRatioLimit) {
-            initViewHeight *= 2;
+            initVH *= 2;
         }
-        this.scaleLimit = scaleLimit;
-        this.viewHeight = {init: initViewHeight, min: initViewHeight / 3, max: initViewHeight};
-        this.t3Attr.position.y = initViewHeight;
+        this.currentScale = 1;
+        this.scaleResetLimit = scaleResetLimit;
+        this.viewHeight = {init: initVH, min: initVH / 3, max: initVH};
+        this.t3Component.position.y = initVH;
     }
 
     updateViewHeight = () => {
-        if (this.t3Attr.position.y >= this.viewHeight.max 
-            || this.t3Attr.position.y <= this.viewHeight.min) {
-                this.t3Attr.position.y = this.viewHeight.init;
+        if (this.t3Component.position.y > this.viewHeight.max
+            || this.t3Component.position.y < this.viewHeight.min) {
+                this.currentScale *= this.t3Component.position.y / this.viewHeight.init
+                this.t3Component.position.y = this.viewHeight.init;
                 return true;
             }
         return false;

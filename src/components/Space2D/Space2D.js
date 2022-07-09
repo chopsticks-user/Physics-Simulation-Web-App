@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import PropTypes from "prop-types"
 import { init2D } from "../../helper/T3/init"
 // import * as t3 from "three"
-import { Camera2D } from "../../helper/T3/camera"
+import { Camera2D } from "../../helper/T3/Camera"
 
 const Space2D = ({axesColor, gridLinesColor, displayAxes, displayGrid}) => {
     const ref = useRef();
@@ -22,7 +22,7 @@ const Space2D = ({axesColor, gridLinesColor, displayAxes, displayGrid}) => {
         const {gridScene, renderer, camera, orbit} = init2D(currentRef, axesColor, gridLinesColor);
 
         const animation = () => {
-            if (camera.position.y > 12 || camera.position.y < 4) {
+            if (camera.position.y > 12 || camera.position.y < 3) {
                 camera.position.y = 6;
                 orbit.target.z = camera.position.z;
             }
@@ -74,7 +74,7 @@ const Space2D = ({axesColor, gridLinesColor, displayAxes, displayGrid}) => {
 
 Space2D.defaultProps = {
     axesColor: "red", 
-    gridLinesColor: "#888888", 
+    gridLinesColor: "#4f4f4f", 
     displayGrid: true, 
     displayAxes: true, 
 }
