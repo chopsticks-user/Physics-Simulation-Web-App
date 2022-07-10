@@ -6,16 +6,24 @@ import { toRadians } from "../Math2D/ConvertMS"
 
 class Space2DController {
     constructor(parentDomElement) {
-        this.width = parentDomElement.clientWidth;
-        this.height = parentDomElement.clientHeight;
+        if (Space2DController.instance) {
+            return Space2DController.instance;
+        }
+        Space2DController.instance = this;
 
-        this.camera = new Camera2D(this.width, this.height);
-        this.renderer = new Renderer2D(this.width, this.height);
+        this.parameters = {
+            width: parentDomElement.clientWidth, 
+            height: parentDomElement.clientHeight
+        }
+
+        this.camera = new Camera2D(this.parameters.width, this.parameters.height);
+        this.renderer = new Renderer2D(this.parameters.width, this.parameters.height);
         this.grid = new Grid2D();
         this.orbit = new Orbit2D(this.camera, this.renderer);
 
         parentDomElement.appendChild(this.renderer.t3Component.domElement);
         this.setAnimation(this.animation);
+        return Space2DController.instance;
     }
     
     render = () => {
