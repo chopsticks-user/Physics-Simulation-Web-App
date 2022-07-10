@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
-import Space2DController from "../../helper/T3/SpaceController"
+import { Space2DController} from "../../modules/t3-helper/SpaceController"
 
 const Space2D = ({setGridSize, setMeasureAttr, axesColor, gridLinesColor, displayAxes, displayGrid}) => {
     const ref = useRef();
@@ -20,7 +20,6 @@ const Space2D = ({setGridSize, setMeasureAttr, axesColor, gridLinesColor, displa
             ref.current.addEventListener("wheel", () => {
                 setGridSize(controller.getGridSize());
                 setMeasureAttr(controller.getMeasureAttr());
-                // console.log(controller.getGridSize(), controller.getMeasureAttr());
             });
         } else {
             isMounted.current = true;
