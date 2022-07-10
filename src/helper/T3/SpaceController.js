@@ -14,8 +14,6 @@ class Space2DController {
         this.grid = new Grid2D();
         this.orbit = new Orbit2D(this.camera, this.renderer);
 
-        
-
         parentDomElement.appendChild(this.renderer.t3Component.domElement);
         this.setAnimation(this.animation);
     }
@@ -47,7 +45,18 @@ class Space2DController {
     }
 
     getMeasureAttr = () => {
+        if (this.gridSizeWillBeReset()) {
+            return {
+                scale: this.camera.currentScale * this.getPosition().z 
+                / this.camera.viewAttr.default, 
+                unit: "m"
+            }
+        }
         return {scale: this.camera.currentScale, unit: "m"};
+    }
+
+    gridSizeWillBeReset = () => {
+        return this.camera.viewHeightWillBeReset();
     }
 
 }

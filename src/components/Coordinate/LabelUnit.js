@@ -3,9 +3,9 @@ import PropTypes from "prop-types"
 const LabelUnit = ({measureAttr}) => {
   return (
     <div className="label-container" id="lcu">
-        <p>{measureAttr.scale.toFixed(2)}</p>
+        <p>e{Math.floor(Math.log10(measureAttr.scale)) + 1}</p>
         <p>{measureAttr.unit}</p>
-        {console.log(measureAttr)}
+        {console.log(measureAttr.scale)}
     </div>
   )
 }

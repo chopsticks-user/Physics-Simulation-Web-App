@@ -23,7 +23,11 @@ const Space2D = ({setGridSize, setMeasure, axesColor, gridLinesColor, displayAxe
 
             ref.current.addEventListener("wheel", () => {
                 setGridSize(controller.getGridSize());
-                setMeasure(controller.getMeasureAttr());
+                // setMeasure(controller.getMeasureAttr());
+                if (controller.camera.t3Component.position.y > controller.camera.viewAttr.max || 
+                    controller.camera.t3Component.position.y < controller.camera.viewAttr.min) {
+                    setMeasure(controller.getMeasureAttr());
+                }
                 console.log(controller.getGridSize(), controller.getMeasureAttr());
             });
         } else {

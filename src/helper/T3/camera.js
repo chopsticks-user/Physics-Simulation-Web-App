@@ -26,13 +26,19 @@ class Camera2D {
 
     updateViewAttr = () => {
         const position = this.getPosition();
-        if (position.z > this.viewAttr.max
-            || position.z < this.viewAttr.min) {
+        if (this.viewHeightWillBeReset()) {
                 this.currentScale *= position.z / this.viewAttr.default
                 this.setPositionZ(this.viewAttr.default);
                 return true;
             }
         return false;
+    }
+
+    viewHeightWillBeReset = () => {
+        return (
+            this.t3Component.position.y > this.viewAttr.max || 
+            this.t3Component.position.y < this.viewAttr.min
+        );
     }
 
     getPosition = () => {
