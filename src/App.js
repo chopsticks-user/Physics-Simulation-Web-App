@@ -5,7 +5,7 @@ import WorkSpace from './components/WorkSpace';
 class App extends React.Component {
   render() {
     return (
-      <div className="container">
+      <div className="page-container">
         <Header/>
         <WorkSpace/>
       </div>

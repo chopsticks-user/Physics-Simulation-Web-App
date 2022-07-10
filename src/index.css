@@ -30,7 +30,7 @@ code {
     monospace;
 }
 
-.container {
+.page-container {
   padding: var(--body-padding);
   height: 100vh;
   width: 100%;

@@ -21,7 +21,7 @@ class Camera2D {
         this.currentScale = 1;
         this.scaleResetLimit = scaleResetLimit;
         this.viewAttr = {default: dhv, min: dhv / 2, max: dhv * 2};
-        this.setPositionZ(this.viewAttr.max);
+        this.setPositionZ(dhv);
     }
 
     updateViewAttr = () => {

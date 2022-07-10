@@ -1,26 +1,26 @@
 import PropTypes from "prop-types"
 import Space2D from "../Space2D"
-import CoordX from "../Coordinate/CoordX"
-import CoordY from "../Coordinate/CoordY"
-import Unit from "../Coordinate/Unit"
+import LabelBarTop from "../Coordinate/LabelBarTop"
+import LabelBarLeft from "../Coordinate/LabelBarLeft"
+import LabelUnit from "../Coordinate/LabelUnit"
 
-const WorkSpace = ({backgroundColor}) => {
+const WorkSpace = () => {
   return (
     <div className="work-space-container">
-      <CoordX/>
-      <CoordY/>
-      <Unit/>
+      <LabelBarTop/>
+      <LabelBarLeft/>
+      <LabelUnit/>
       <Space2D/>
     </div>
   )
 }
 
 WorkSpace.defaultProps = {
-    backgroundColor: "black", 
+     
 }
 
 WorkSpace.propTypes = {
-    backgroundColor: PropTypes.string.isRequired, 
+     
 }
 
 export default WorkSpace;
