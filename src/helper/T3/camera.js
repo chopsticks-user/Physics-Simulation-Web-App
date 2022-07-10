@@ -66,4 +66,4 @@ class Camera2D {
     }
 }
 
-export default Camera2D;
+export { Camera2D };

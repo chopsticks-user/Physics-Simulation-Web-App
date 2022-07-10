@@ -4,7 +4,7 @@ const LabelBarTop = ({labelSpacing, labelSize}) => {
   return (
     <div className="label-container" id="lcx">
       <p>0.00</p>
-      {console.log(labelSpacing, labelSize)}
+      {/* {console.log(labelSpacing, labelSize)} */}
     </div>
   )
 }

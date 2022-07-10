@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import Space2DController from "../../helper/T3/SpaceController"
 
-const Space2D = ({setGridSize, setMeasure, axesColor, gridLinesColor, displayAxes, displayGrid}) => {
+const Space2D = ({setGridSize, setMeasureAttr, axesColor, gridLinesColor, displayAxes, displayGrid}) => {
     const ref = useRef();
     const isMounted = useRef(false);
     
@@ -19,19 +19,19 @@ const Space2D = ({setGridSize, setMeasure, axesColor, gridLinesColor, displayAxe
 
             ref.current.addEventListener("wheel", () => {
                 setGridSize(controller.getGridSize());
-                setMeasure(controller.getMeasureAttr());
-                console.log(controller.getGridSize(), controller.getMeasureAttr());
+                setMeasureAttr(controller.getMeasureAttr());
+                // console.log(controller.getGridSize(), controller.getMeasureAttr());
             });
         } else {
             isMounted.current = true;
         }
 
-    }, [axesColor, gridLinesColor, setGridSize, setMeasure]);
+    }, [axesColor, gridLinesColor, setGridSize, setMeasureAttr]);
 
     return (
         <div className="space-2d-container" 
             ref={ref}>
-            {console.log("Space 2D was rendered.")}
+            {/* {console.log("Space 2D was rendered.")} */}
         </div>
         
     );

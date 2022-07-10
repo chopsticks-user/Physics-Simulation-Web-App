@@ -19,4 +19,4 @@ class Grid2D {
     }
 }
 
-export default Grid2D;
+export { Grid2D };

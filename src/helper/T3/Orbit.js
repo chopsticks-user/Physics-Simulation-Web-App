@@ -1,6 +1,6 @@
 import { OrbitControls} from "three/examples/jsm/controls/OrbitControls"
 
-export class Orbit2D {
+class Orbit2D {
     constructor(camera2D, renderer2D, enableRotate = false) {
         this.t3Component = new OrbitControls(
             camera2D.t3Component, 
@@ -12,4 +12,4 @@ export class Orbit2D {
 }
 
 
-export default Orbit2D;
+export { Orbit2D };

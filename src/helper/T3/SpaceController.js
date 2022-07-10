@@ -1,7 +1,7 @@
-import Camera2D from "./Camera"
-import Renderer2D from "./Renderer"
-import Grid2D from "./Grid"
-import Orbit2D from "./Orbit"
+import { Camera2D } from "./Camera"
+import { Renderer2D } from "./Renderer"
+import { Grid2D } from "./Grid"
+import { Orbit2D } from "./Orbit"
 import { toRadians } from "../Math2D/ConvertMS"
 
 class Space2DController {

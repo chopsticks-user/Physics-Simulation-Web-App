@@ -2,7 +2,8 @@ import PropTypes from "prop-types"
 
 const LabelBarLeft = ({labelSpacing, labelSize}) => {
   return (
-    <div className="label-container" id="lcy">0.00{console.log(labelSpacing, labelSize)}
+    <div className="label-container" id="lcy">0.00
+    {/* {console.log(labelSpacing, labelSize)} */}
     </div>
   )
 }

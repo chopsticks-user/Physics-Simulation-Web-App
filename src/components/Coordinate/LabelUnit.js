@@ -5,7 +5,7 @@ const LabelUnit = ({measureAttr}) => {
     <div className="label-container" id="lcu">
         <p>e{Math.floor(Math.log10(measureAttr.scale)) + 1}</p>
         <p>{measureAttr.unit}</p>
-        {console.log(measureAttr.scale)}
+        {/* {console.log(measureAttr.scale)} */}
     </div>
   )
 }

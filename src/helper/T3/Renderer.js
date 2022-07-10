@@ -6,8 +6,8 @@ class Renderer2D {
         this.t3Component.setSize(targetWidth, targetHeight);
     }
 
-    render = (...args) => {
-        this.t3Component.render(...args);
+    render = (scence, ...args) => {
+        this.t3Component.render(scence, ...args);
     }
 
     setAnimation = (animation) => {
@@ -15,4 +15,4 @@ class Renderer2D {
     }
 }
 
-export default Renderer2D;
+export { Renderer2D };
