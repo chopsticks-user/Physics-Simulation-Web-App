@@ -1,22 +1,24 @@
 import PropTypes from "prop-types"
 
-const LabelUnit = ({sciNotation, unit}) => {
+const LabelUnit = ({measureAttr}) => {
   return (
     <div className="label-container" id="lcu">
-        <p>{sciNotation}</p>
-        <p>{unit}</p>
+        <p>{measureAttr.scale.toFixed(2)}</p>
+        <p>{measureAttr.unit}</p>
+        {console.log(measureAttr)}
     </div>
   )
 }
 
 LabelUnit.defaultProps = {
-  sciNotation: "e0", 
-  unit: "m"
+  measureAttr: {scale: 1, unit: "m"}
 }
 
 LabelUnit.propTypes = {
-  sciNotation: PropTypes.string.isRequired, 
-  unit: PropTypes.string.isRequired
+  measureAttr: PropTypes.shape({
+    scale: PropTypes.number.isRequired, 
+    unit: PropTypes.string.isRequired
+  }).isRequired
 }
 
 export default LabelUnit;

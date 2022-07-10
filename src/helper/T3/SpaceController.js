@@ -46,6 +46,10 @@ class Space2DController {
         return verticalViewInPixels / (cameraViewHeight * 2 * Math.tan(verticalFovInRadians / 2));
     }
 
+    getMeasureAttr = () => {
+        return {scale: this.camera.currentScale, unit: "m"};
+    }
+
 }
 
 export default Space2DController;

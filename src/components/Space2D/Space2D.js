@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { initGridLinesAttr } from "../../helper/T3/init"
 import Space2DController from "../../helper/T3/SpaceController"
 
-const Space2D = ({setGridSize, axesColor, gridLinesColor, displayAxes, displayGrid}) => {
+const Space2D = ({setGridSize, setMeasure, axesColor, gridLinesColor, displayAxes, displayGrid}) => {
     const ref = useRef();
     const isMounted = useRef(false);
     
@@ -23,13 +23,14 @@ const Space2D = ({setGridSize, axesColor, gridLinesColor, displayAxes, displayGr
 
             ref.current.addEventListener("wheel", () => {
                 setGridSize(controller.getGridSize());
-                console.log(controller.getGridSize());
+                setMeasure(controller.getMeasureAttr());
+                console.log(controller.getGridSize(), controller.getMeasureAttr());
             });
         } else {
             isMounted.current = true;
         }
 
-    }, [axesColor, gridLinesColor, setGridSize]);
+    }, [axesColor, gridLinesColor, setGridSize, setMeasure]);
 
     return (
         <div className="space-2d-container" 
