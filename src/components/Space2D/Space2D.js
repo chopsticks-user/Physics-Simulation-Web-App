@@ -15,23 +15,7 @@ const Space2D = ({axesColor, gridLinesColor, displayAxes, displayGrid}) => {
 
         let w = ref.current.clientWidth;
         let h = ref.current.clientHeight;
-
         const controller = new Space2DController(ref.current);
-
-
-        // const camera = new Camera2D(w, h);
-        // const renderer = new Renderer2D(w, h);
-        // const grid = new Grid2D();
-        // const orbit = new Orbit2D(camera, renderer);
-        // ref.current.appendChild(renderer.t3Component.domElement);
-
-        // const animation = () => {
-        //     if (camera.updateViewAttr()) {
-        //         orbit.t3Component.target.z = camera.t3Component.position.z;
-        //     }
-        //     renderer.t3Component.render(grid.t3Scene, camera.t3Component);
-        // }
-        // renderer.t3Component.setAnimationLoop(animation);
 
         ref.current.addEventListener("dblclick", (e) => {
             console.log(w, h);

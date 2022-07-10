@@ -7,8 +7,8 @@ import LabelUnit from "../Coordinate/LabelUnit"
 const WorkSpace = () => {
   return (
     <div className="work-space-container">
-      <LabelBarTop/>
-      <LabelBarLeft/>
+      <LabelBarTop gridSize={50}/>
+      <LabelBarLeft gridSize={50}/>
       <LabelUnit/>
       <Space2D/>
     </div>
