@@ -1,5 +1,4 @@
 import * as t3 from "three"
-import { t3Grid2DUnitToPixel } from "../Math2D/T3Convert2DToPixel";
 
 class Grid2D {
     constructor(width = 31416, height = 31416, axesColor = "red", lineColor = "#888888") {
@@ -17,9 +16,6 @@ class Grid2D {
             ), 
             this.t3Component
         );
-    }
-    getUnitSizeToPixel = (Camera2D) => {
-        return t3Grid2DUnitToPixel(Camera2D);
     }
 }
 

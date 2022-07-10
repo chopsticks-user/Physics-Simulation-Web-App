@@ -1,9 +1,5 @@
 import { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
-// import Camera2D from "../../helper/T3/Camera"
-// import Grid2D from "../../helper/T3/Grid"
-// import Renderer2D from "../../helper/T3/Renderer"
-// import Orbit2D from "../../helper/T3/Orbit"
 import { initGridLinesAttr } from "../../helper/T3/init"
 import Space2DController from "../../helper/T3/SpaceController"
 
@@ -40,9 +36,8 @@ const Space2D = ({axesColor, gridLinesColor, displayAxes, displayGrid}) => {
         ref.current.addEventListener("dblclick", (e) => {
             console.log(w, h);
             console.log(initGridLinesAttr(controller.camera.t3Component.position.y, w, h));
-            console.log(controller.camera.getPosition());
-            console.log(controller.camera.t3Component.position);
-            console.log(controller.grid.getUnitSizeToPixel(controller.camera));
+            console.log(controller.getPosition());
+            console.log(controller.getGridSize());
         });
 
     }, [axesColor, gridLinesColor]);
