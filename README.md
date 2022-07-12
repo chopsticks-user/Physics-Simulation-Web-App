@@ -8,4 +8,9 @@ SyntaxError: Cannot use import statement outside a module
        9 | class Space2DController {
       10 |     constructor(parentDomElement) {
 
--> not fixed
+-> fixed, copy OrbitControls.js to folder <t3-helper>
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Error: canvas element not showing up in the build production
+
+-> fixed, add "homepage": "./" in the package.json file
+-------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -28,7 +28,9 @@ const Canvas = ({ setGridSize, setMeasureAttr, axesColor, gridLinesColor, displa
 
   }, [axesColor, gridLinesColor, setGridSize, setMeasureAttr]);
   return (
-    <div className="canvas" ref={ref}></div>
+    <div className="canvas" ref={ref}>
+      {console.log("Rendered")}
+    </div>
   )
 }
 

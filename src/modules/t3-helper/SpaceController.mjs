@@ -19,6 +19,7 @@ class Space2DController {
 
         this.camera = new Camera2D(this.parameters.width, this.parameters.height);
         this.renderer = new Renderer2D(this.parameters.width, this.parameters.height);
+        this.renderer.t3Component.domElement.id = "space";
         this.grid = new Grid2D();
         this.orbit = new Orbit2D(this.camera, this.renderer);
         this.orbit.t3Component.update();
