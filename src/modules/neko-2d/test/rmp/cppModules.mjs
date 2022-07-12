@@ -1,6 +1,5 @@
 import Module from './api_example.js'
-import { performance } from "perf_hooks"
-import Neko2D from './index.mjs';
+import Neko2D from './init.mjs';
 
 const module = await Module();
 ((state) => {
