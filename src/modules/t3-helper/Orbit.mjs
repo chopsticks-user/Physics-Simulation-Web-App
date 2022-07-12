@@ -1,4 +1,6 @@
-import { OrbitControls} from "three/examples/jsm/controls/OrbitControls"
+// import { OrbitControls} from "three/examples/jsm/controls/OrbitControls.js"
+// OrbitControls = require("three/examples/jsm/controls/OrbitControls.js");
+import { OrbitControls } from "./OrbitControls.js"
 
 class Orbit2D {
     constructor(camera2D, renderer2D, enableRotate = false) {
