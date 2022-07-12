@@ -11,4 +11,6 @@ var module = (function () {
     return moduleRoot;
 }());
 
-export default module;
+// export default module;
+
+console.log(module.publicMethod() + 1);
