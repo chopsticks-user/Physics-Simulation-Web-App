@@ -1,5 +1,7 @@
-import Neko2D from "./cppModules.mjs"
 import { performance } from "perf_hooks"
+import "./cppModules.mjs"
+import "./cppModules1.mjs"
+import Neko2D from "./index.mjs";
 
 const sum = () => {
     let r = 0;

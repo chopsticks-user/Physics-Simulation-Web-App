@@ -20,17 +20,6 @@ std::map<int, std::string> returnMapData()
   return m;
 }
 
-float sum()
-{
-  float e = exp(1.0);
-  float sum = 0.0;
-  for (int i = 0; i < 20; i++)
-  {
-    sum += pow(e, i);
-  }
-  return sum;
-}
-
 class MyClass
 {
 public:
@@ -69,7 +58,6 @@ EMSCRIPTEN_BINDINGS(my_class_example)
 
 EMSCRIPTEN_BINDINGS(module)
 {
-  function("sum", &sum);
   function("returnVectorData", &returnVectorData);
   function("returnMapData", &returnMapData);
 
