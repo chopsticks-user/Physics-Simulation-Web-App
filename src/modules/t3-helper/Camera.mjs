@@ -1,4 +1,4 @@
-import * as t3 from "three"
+import * as THREE from "three"
 
 class Camera2D {
     constructor(spaceWidth, spaceHeight, near = 0.1, far = 1000, fov = 91, 
@@ -8,7 +8,7 @@ class Camera2D {
         this.aspectRatio = spaceWidth / spaceHeight;
         this.aspectRatioLimit = aspectRatioLimit;
         this.fov = {hor: fov * this.aspectRatio, ver: fov};
-        this.t3Component = new t3.PerspectiveCamera(
+        this.t3Component = new THREE.PerspectiveCamera(
             this.fov.ver, 
             this.aspectRatio, 
             near, 

@@ -5,31 +5,24 @@ import { Space2DController } from "../../modules/t3-helper/SpaceController.mjs"
 
 const Canvas = ({ setGridSize, setMeasureAttr, axesColor, gridLinesColor, displayAxes, displayGrid }) => {
   const ref = useRef();
-  const isMounted = useRef(false);
 
   useEffect(() => {
-    if (isMounted.current) {
-      // let w = ref.current.clientWidth;
-      // let h = ref.current.clientHeight;
-      const controller = new Space2DController(ref.current);
+    const controller = new Space2DController(ref.current);
+    setGridSize(controller.getGridSize());
+
+    ref.current.addEventListener("dblclick", (e) => {
+
+    });
+
+    ref.current.addEventListener("wheel", () => {
       setGridSize(controller.getGridSize());
-
-      ref.current.addEventListener("dblclick", (e) => {
-
-      });
-
-      ref.current.addEventListener("wheel", () => {
-        setGridSize(controller.getGridSize());
-        setMeasureAttr(controller.getMeasureAttr());
-      });
-    } else {
-      isMounted.current = true;
-    }
+      setMeasureAttr(controller.getMeasureAttr());
+    });
 
   }, [axesColor, gridLinesColor, setGridSize, setMeasureAttr]);
   return (
     <div className="canvas" ref={ref}>
-      {console.log("Rendered")}
+      {console.log(ref.current)}
     </div>
   )
 }

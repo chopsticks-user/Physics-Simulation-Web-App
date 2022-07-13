@@ -1,0 +1,9 @@
+{
+    "name": "space-controller-2d",
+    "version": "0.1.0",
+    "private": true,
+    "entry point": "SpaceController.mjs",
+    "dependencies": {
+      "three": "^0.142.0"
+    }
+}

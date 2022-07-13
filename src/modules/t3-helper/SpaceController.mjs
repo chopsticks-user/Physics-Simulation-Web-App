@@ -3,10 +3,10 @@ import { Renderer2D } from "./Renderer.mjs"
 import { Grid2D } from "./Grid.mjs"
 import { Orbit2D } from "./Orbit.mjs"
 import { toRadians } from "../neko-2d/src/ultis/ConvertMS.js"
-// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 
 class Space2DController {
     constructor(parentDomElement) {
+        console.log("sc2d");
         if (Space2DController.instance) {
             return Space2DController.instance;
         }
