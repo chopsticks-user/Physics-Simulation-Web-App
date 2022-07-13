@@ -1,7 +1,10 @@
 import Module from './api_example.js'
 import Neko2D from './init.mjs';
 
-const module = await Module();
+const module = async () => {
+    await Module();
+    return Module();
+}
 ((state) => {
     var state = state || {};
     state.vector = class {

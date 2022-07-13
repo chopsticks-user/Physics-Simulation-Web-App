@@ -12,5 +12,6 @@ SyntaxError: Cannot use import statement outside a module
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 Error: canvas element not showing up in the build production
 
--> fixed, add "homepage": "./" in the package.json file
+-> fixed, add "homepage": "./" in the package.json file, add a package.json file in <t3-helper>
+then run: "npm install --save ./src/modules/t3-helper"
 -------------------------------------------------------------------------------------------------------------------------------------------------------
