@@ -7,6 +7,7 @@ import { toRadians } from "../neko-2d/ultis/ConvertMS.js"
 class Space2DController {
     constructor(parentDomElement) {
         if (Space2DController.instance) {
+            console.log("controller");
             return Space2DController.instance;
         }
         Space2DController.instance = this;
