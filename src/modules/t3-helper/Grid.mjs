@@ -14,7 +14,7 @@ class Grid2D {
                     visible: false
                 })
             ), 
-            this.t3Component
+            this.t3Component, 
         );
     }
 }

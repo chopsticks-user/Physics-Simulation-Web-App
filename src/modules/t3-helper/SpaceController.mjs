@@ -69,7 +69,10 @@ class Space2DController {
     gridSizeWillBeReset = () => {
         return this.camera.viewHeightWillBeReset();
     }
-
+    
+    displayGrid(display) {
+        this.grid.t3Component.visible = display;
+    }
 }
 
 export { Space2DController };

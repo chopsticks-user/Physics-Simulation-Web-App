@@ -3,8 +3,9 @@ import { useEffect, useRef } from "react"
 import { Space2DController } from "../../modules/t3-helper/SpaceController.mjs"
 import Neko2D from "../../modules/neko-2d"
 
-const Space2D = ({ setGridSize, setMeasureAttr, axesColor, gridLinesColor, displayAxes, displayGrid }) => {
+const Space2D = ({ setGridSize, setMeasureAttr, axesColor, gridLinesColor, displayGrid }) => {
     const ref = useRef();
+    const displayGridRef = useRef(displayGrid);
 
     useEffect(() => {
         let ts = performance.now();
@@ -17,14 +18,12 @@ const Space2D = ({ setGridSize, setMeasureAttr, axesColor, gridLinesColor, displ
         let dragLast = controller.camera.getPosition();
         let dragged = false;
 
-        console.log();
-
         ref.current.addEventListener("mousedown", () => {
             dragStart = controller.camera.getPosition();
             dragLast = controller.camera.getPosition();
             dragged = true;
-            // console.log(dragStart);
-            // console.log(space.view);
+            console.log(dragStart);
+            console.log(space.view);
         });
 
         ref.current.addEventListener("mousemove", () => {
@@ -42,19 +41,21 @@ const Space2D = ({ setGridSize, setMeasureAttr, axesColor, gridLinesColor, displ
 
         ref.current.addEventListener("mouseup", () => {
             dragged = false;
-            // console.log(dragCurrent);
-            // console.log(space.view);
+            console.log(dragCurrent);
+            console.log(space.view);
         });
 
         ref.current.addEventListener("wheel", () => {
             setGridSize(controller.getGridSize());
             setMeasureAttr(controller.getMeasureAttr());
             space.scale = controller.camera.currentScale;
-            // console.log(space.scale);
+            console.log(space.scale);
         });
 
         ref.current.addEventListener("dblclick", () => {
-
+            displayGridRef.current = !displayGridRef.current;
+            console.log(displayGridRef.current);
+            controller.displayGrid(displayGridRef.current);
         });
         console.log(performance.now() - ts);
     }, [axesColor, gridLinesColor, setGridSize, setMeasureAttr]);
@@ -70,15 +71,13 @@ const Space2D = ({ setGridSize, setMeasureAttr, axesColor, gridLinesColor, displ
 Space2D.defaultProps = {
     axesColor: "red",
     gridLinesColor: "#4f4f4f",
-    displayGrid: true,
-    displayAxes: true,
+    displayGrid: true
 }
 
 Space2D.propTypes = {
     axesColor: PropTypes.string.isRequired,
     gridLinesColor: PropTypes.string.isRequired,
-    displayGrid: PropTypes.bool.isRequired,
-    displayAxes: PropTypes.bool.isRequired,
+    displayGrid: PropTypes.bool.isRequired
 }
 
 export default Space2D;
