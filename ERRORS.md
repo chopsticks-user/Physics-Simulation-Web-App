@@ -15,3 +15,8 @@ Error: canvas element not showing up in the build production
 -> fixed, add "homepage": "./" in the package.json file, add a package.json file in <t3-helper>
 then run: "npm install --save ./src/modules/t3-helper"
 -------------------------------------------------------------------------------------------------------------------------------------------------------
+Left mouse button to pan: 
+OrbitControls.js: line 88
+	 88: this.mouseButtons = { LEFT: MOUSE.ROTATE, MIDDLE: MOUSE.DOLLY, RIGHT: MOUSE.PAN };
+-> 88: this.mouseButtons = { LEFT: MOUSE.PAN, MIDDLE: MOUSE.DOLLY, RIGHT: MOUSE.ROTATE };
+--------------------------------------------------------------------------------------------------------------------------------------------------------

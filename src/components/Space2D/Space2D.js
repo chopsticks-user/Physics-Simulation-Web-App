@@ -7,42 +7,56 @@ const Space2D = ({ setGridSize, setMeasureAttr, axesColor, gridLinesColor, displ
     const ref = useRef();
 
     useEffect(() => {
+        let ts = performance.now();
         const controller = new Space2DController(ref.current);
         setGridSize(controller.getGridSize());
         const space = new Neko2D.Space();
         
-        ref.current.addEventListener("dblclick", () => {
-            
-        });
-
-        let dragStart = {x: 0, y: 0};
-        let dragCurrent = {x: 0, y: 0};
+        let dragStart = controller.camera.getPosition();
+        let dragCurrent = controller.camera.getPosition();
+        let dragLast = controller.camera.getPosition();
         let dragged = false;
 
-        ref.current.addEventListener("mousedown", (e) => {
-            dragStart = {x: e.offsetX, y: e.offsetY};
-            dragCurrent = {x: e.offsetX, y: e.offsetY};
+        console.log();
+
+        ref.current.addEventListener("mousedown", () => {
+            dragStart = controller.camera.getPosition();
+            dragLast = controller.camera.getPosition();
             dragged = true;
-            console.log(dragged);
+            // console.log(dragStart);
+            // console.log(space.view);
         });
 
-        ref.current.addEventListener("mousemove", (e) => {
+        ref.current.addEventListener("mousemove", () => {
             if (dragged) {
-                console.log(e.offsetX - dragCurrent.x, e.offsetY - dragCurrent.y);
-                dragCurrent = {x: e.offsetX, y: e.offsetY};
+                dragCurrent = controller.camera.getPosition();
+                if (dragLast.x !== dragCurrent.x || dragLast.y !== dragCurrent.y) {
+                    space.transform(
+                        dragCurrent.x - dragLast.x,
+                        dragCurrent.y - dragLast.y
+                    );
+                    dragLast = dragCurrent;
+                }
             }
         });
 
-        ref.current.addEventListener("mouseup", (e) => {
+        ref.current.addEventListener("mouseup", () => {
             dragged = false;
-            console.log(e.offsetX - dragStart.x, e.offsetY - dragStart.y);
+            // console.log(dragCurrent);
+            // console.log(space.view);
         });
 
         ref.current.addEventListener("wheel", () => {
             setGridSize(controller.getGridSize());
             setMeasureAttr(controller.getMeasureAttr());
+            space.scale = controller.camera.currentScale;
+            // console.log(space.scale);
         });
 
+        ref.current.addEventListener("dblclick", () => {
+
+        });
+        console.log(performance.now() - ts);
     }, [axesColor, gridLinesColor, setGridSize, setMeasureAttr]);
 
     return (
