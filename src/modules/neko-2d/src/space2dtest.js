@@ -8,7 +8,9 @@ const Space2D = ({ setCenter, setMeasureAttr, axesColor, gridLinesColor, display
     const displayGridRef = useRef(displayGrid);
 
     useEffect(() => {
+        let ts = performance.now();
         const controller = new Space2DController(ref.current);
+        const space = new Neko2D.Space();
         
         let dragStart = controller.camera.getPosition();
         let dragCurrent = controller.camera.getPosition();
@@ -25,6 +27,10 @@ const Space2D = ({ setCenter, setMeasureAttr, axesColor, gridLinesColor, display
             if (dragged) {
                 dragCurrent = controller.camera.getPosition();
                 if (dragLast.x !== dragCurrent.x || dragLast.y !== dragCurrent.y) {
+                    space.transform(
+                        dragCurrent.x - dragLast.x,
+                        dragCurrent.y - dragLast.y
+                    );
                     dragLast = dragCurrent;
                     setCenter({x: dragCurrent.x, y: dragCurrent.y});
                 }
@@ -35,13 +41,18 @@ const Space2D = ({ setCenter, setMeasureAttr, axesColor, gridLinesColor, display
             dragged = false;
         });
 
+        ref.current.addEventListener("wheel", () => {
+            space.scale = controller.camera.currentScale;
+        });
+
         ref.current.addEventListener("dblclick", () => {
             displayGridRef.current = !displayGridRef.current;
             controller.displayGrid(displayGridRef.current);
             console.log(controller.camera.t3Component.position);
             console.log(controller.orbit.t3Component.target);
-            console.log(controller.getGridSize());
+            console.log(space.view);
         });
+        console.log(performance.now() - ts);
     }, [axesColor, gridLinesColor, setCenter, setMeasureAttr]);
 
     return (

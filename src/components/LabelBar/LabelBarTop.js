@@ -15,7 +15,6 @@ LabelBarTop.defaultProps = {
 }
 
 LabelBarTop.propTypes = {
-  labelSpacing: PropTypes.number.isRequired, 
   labelSize: PropTypes.shape({
     w: PropTypes.number.isRequired, 
     h: PropTypes.number.isRequired

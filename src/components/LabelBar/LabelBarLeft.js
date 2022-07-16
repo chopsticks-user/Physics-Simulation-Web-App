@@ -15,7 +15,6 @@ LabelBarLeft.defaultProps = {
 }
 
 LabelBarLeft.propTypes = {
-  labelSpacing: PropTypes.number.isRequired, 
   labelSize: PropTypes.shape({
     w: PropTypes.number.isRequired, 
     h: PropTypes.number.isRequired
