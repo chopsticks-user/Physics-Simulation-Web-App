@@ -22,8 +22,6 @@ const Space2D = ({ setGridSize, setMeasureAttr, axesColor, gridLinesColor, displ
             dragStart = controller.camera.getPosition();
             dragLast = controller.camera.getPosition();
             dragged = true;
-            console.log(dragStart);
-            console.log(space.view);
         });
 
         ref.current.addEventListener("mousemove", () => {
@@ -41,21 +39,19 @@ const Space2D = ({ setGridSize, setMeasureAttr, axesColor, gridLinesColor, displ
 
         ref.current.addEventListener("mouseup", () => {
             dragged = false;
-            console.log(dragCurrent);
-            console.log(space.view);
         });
 
         ref.current.addEventListener("wheel", () => {
             setGridSize(controller.getGridSize());
             setMeasureAttr(controller.getMeasureAttr());
             space.scale = controller.camera.currentScale;
-            console.log(space.scale);
         });
 
         ref.current.addEventListener("dblclick", () => {
             displayGridRef.current = !displayGridRef.current;
-            console.log(displayGridRef.current);
             controller.displayGrid(displayGridRef.current);
+            console.log(controller.camera.t3Component.position);
+            console.log(controller.orbit.t3Component.target);
         });
         console.log(performance.now() - ts);
     }, [axesColor, gridLinesColor, setGridSize, setMeasureAttr]);

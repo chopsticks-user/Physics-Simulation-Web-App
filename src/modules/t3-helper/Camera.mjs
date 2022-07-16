@@ -2,7 +2,7 @@ import * as THREE from "three"
 
 class Camera2D {
     constructor(spaceWidth, spaceHeight, near = 0.1, far = 1000, fov = 91, 
-        aspectRatioLimit = 2.3, defaultViewHeight = 6, scaleResetLimit = 2) {
+        aspectRatioLimit = 2.3, defaultViewHeight = 4, scaleResetLimit = 2) {
 
         this.obs = {width: spaceWidth, height: spaceHeight, near: near, far: far};
         this.aspectRatio = spaceWidth / spaceHeight;
@@ -20,15 +20,16 @@ class Camera2D {
         }
         this.currentScale = 1;
         this.scaleResetLimit = scaleResetLimit;
-        this.viewAttr = {default: dhv, min: dhv / 2, max: dhv * 2};
+        this.viewAttr = {default: dhv, min: dhv / 3, max: dhv * 2};
         this.setPositionZ(dhv);
     }
 
     updateViewAttr = () => {
         const position = this.getPosition();
         if (this.viewHeightWillBeReset()) {
-                this.currentScale *= position.z / this.viewAttr.default
-                this.setPositionZ(this.viewAttr.default);
+                // this.currentScale *= position.z / this.viewAttr.default
+                // this.setPositionZ(this.viewAttr.default);
+                this.setPositionZ(position.z >= this.viewAttr.default ? this.viewAttr.max : this.viewAttr.min);
                 return true;
             }
         return false;
