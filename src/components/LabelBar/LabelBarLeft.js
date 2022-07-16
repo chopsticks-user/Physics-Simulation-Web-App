@@ -1,9 +1,11 @@
 import PropTypes from "prop-types"
 
-const LabelBarLeft = ({labelSpacing, labelSize}) => {
+const LabelBarLeft = ({selectedPoint, labelSize}) => {
   return (
-    <div className="label-container" id="lcy">0.00
-    {/* {console.log(labelSpacing, labelSize)} */}
+    <div className="label-container" id="lcy">
+      <div style={{transform: "rotate(-90deg)"}}>
+        {selectedPoint.y}
+      </div>
     </div>
   )
 }
