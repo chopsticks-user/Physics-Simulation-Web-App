@@ -14,14 +14,10 @@ const WorkSpace = () => {
   const [center, setCenter] = useState({x: 0, y: 0});
   const [measureAttr, setMeasureAttr] = useState({ scale: 1, unit: "m" });
 
-  const format = (point) => {
-    return {x: point.x.toFixed(3), y: point.y.toFixed(3)};
-  }
-
   return (
     <div className="work-space-container">
-      <LabelBarTop center={format(center)} selectedPoint={selectedPoint} labelSize={labelSize} />
-      <LabelBarLeft center={format(center)} selectedPoint={selectedPoint} labelSize={labelSize} />
+      <LabelBarTop center={center} selectedPoint={selectedPoint} labelSize={labelSize} />
+      <LabelBarLeft center={center} selectedPoint={selectedPoint} labelSize={labelSize} />
       <PlaneInfo measureAttr={measureAttr} />
       <Space2D setCenter={setCenter} setSelectedPoint={setSelectedPoint} setMeasureAttr={setMeasureAttr} />
       {console.log(selectedPoint)}
