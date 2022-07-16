@@ -1,7 +1,7 @@
 import * as THREE from "three"
 
 class Grid2D {
-    constructor(width = 3141622, height = 3141622, axesColor = "red", lineColor = "#888888") {
+    constructor(width = 314162, height = 314162, axesColor = "red", lineColor = "#888888") {
         this.size = {width: width, height: height};
         this.axesColor = axesColor;
         this.lineColor = lineColor;

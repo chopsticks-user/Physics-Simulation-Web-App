@@ -9,6 +9,7 @@ class Orbit2D {
             renderer2D.t3Component.domElement
         );
         this.t3Component.enableRotate = enableRotate;
+        // this.t3Component.enableZoom = false;
         this.t3Component.update();
     }
 }

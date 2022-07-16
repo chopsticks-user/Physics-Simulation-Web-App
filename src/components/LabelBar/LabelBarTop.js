@@ -1,23 +1,34 @@
 import PropTypes from "prop-types"
+import { useEffect, useState, useRef } from "react"
 
-const LabelBarTop = ({labelSpacing, labelSize}) => {
+const LabelBarTop = ({center, selectedPoint, measureAttr}) => {
+  
+
   return (
     <div className="label-container" id="lcx">
-      <p>0.00</p>
-      {/* {console.log(labelSpacing, labelSize)} */}
+      <div>
+        {center.x}
+      </div>
     </div>
   )
 }
 
 LabelBarTop.defaultProps = {
-  labelSize: "10px"
+  measureAttr: {scale: 1, unit: "m"}
 }
 
 LabelBarTop.propTypes = {
-  labelSpacing: PropTypes.number.isRequired, 
-  labelSize: PropTypes.shape({
-    w: PropTypes.number.isRequired, 
-    h: PropTypes.number.isRequired
+  center: PropTypes.shape({
+    x: PropTypes.number.isRequired, 
+    y: PropTypes.number.isRequired
+  }).isRequired, 
+  selectedPoint: PropTypes.shape({
+    x: PropTypes.number.isRequired, 
+    y: PropTypes.number.isRequired
+  }).isRequired, 
+  measureAttr: PropTypes.shape({
+    scale: PropTypes.number.isRequired, 
+    unit: PropTypes.string.isRequired
   }).isRequired
 }
 
