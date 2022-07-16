@@ -1,9 +1,9 @@
 import PropTypes from "prop-types"
 
-const LabelBarLeft = ({center, labelSize}) => {
+const LabelBarLeft = ({ center, selectedPoint, labelSize }) => {
   return (
     <div className="label-container" id="lcy">
-      <div style={{transform: "rotate(-90deg)"}}>
+      <div style={{ transform: "rotate(-90deg)" }}>
         {center.y}
       </div>
     </div>
@@ -11,12 +11,24 @@ const LabelBarLeft = ({center, labelSize}) => {
 }
 
 LabelBarLeft.defaultProps = {
-  labelSize: "12px"
+  center: { x: 0, y: 0 }, 
+  selectedPoint: { x: 0, y: 0 }, 
+  lebelSize: { w: 24, h: 12 }
 }
 
 LabelBarLeft.propTypes = {
+  // center: PropTypes.shape({
+  //   x: PropTypes.number.isRequired,
+  //   y: PropTypes.number.isRequired
+  // }).isRequired, 
+
+  // selectedPoint: PropTypes.shape({
+  //   x: PropTypes.number.isRequired,
+  //   y: PropTypes.number.isRequired
+  // }).isRequired, 
+
   labelSize: PropTypes.shape({
-    w: PropTypes.number.isRequired, 
+    w: PropTypes.number.isRequired,
     h: PropTypes.number.isRequired
   }).isRequired
 }

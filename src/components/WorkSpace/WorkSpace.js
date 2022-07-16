@@ -7,6 +7,10 @@ import { useState } from "react"
 
 const WorkSpace = () => {
   const labelSize = { w: 24, h: 12 };
+  const [selectedPoint, setSelectedPoint] = useState({
+    pointVal: {x: 0, y: 0}, 
+    mouseLoc: {x: 0, y: 0}
+  });
   const [center, setCenter] = useState({x: 0, y: 0});
   const [measureAttr, setMeasureAttr] = useState({ scale: 1, unit: "m" });
 
@@ -16,10 +20,11 @@ const WorkSpace = () => {
 
   return (
     <div className="work-space-container">
-      <LabelBarTop center={format(center)} labelSize={labelSize} />
-      <LabelBarLeft center={format(center)} labelSize={labelSize} />
+      <LabelBarTop center={format(center)} selectedPoint={selectedPoint} labelSize={labelSize} />
+      <LabelBarLeft center={format(center)} selectedPoint={selectedPoint} labelSize={labelSize} />
       <PlaneInfo measureAttr={measureAttr} />
-      <Space2D setCenter={setCenter} setMeasureAttr={setMeasureAttr} />
+      <Space2D setCenter={setCenter} setSelectedPoint={setSelectedPoint} setMeasureAttr={setMeasureAttr} />
+      {console.log(selectedPoint)}
     </div>
   )
 }

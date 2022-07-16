@@ -1,6 +1,6 @@
 import PropTypes from "prop-types"
 
-const LabelBarTop = ({center, labelSize}) => {
+const LabelBarTop = ({center, selectedPoint, labelSize}) => {
   return (
     <div className="label-container" id="lcx">
       <div>
@@ -11,12 +11,18 @@ const LabelBarTop = ({center, labelSize}) => {
 }
 
 LabelBarTop.defaultProps = {
-  labelSize: "10px"
-}
+  // center: PropTypes.shape({
+  //   x: PropTypes.number.isRequired,
+  //   y: PropTypes.number.isRequired
+  // }).isRequired, 
 
-LabelBarTop.propTypes = {
+  // selectedPoint: PropTypes.shape({
+  //   x: PropTypes.number.isRequired,
+  //   y: PropTypes.number.isRequired
+  // }).isRequired, 
+
   labelSize: PropTypes.shape({
-    w: PropTypes.number.isRequired, 
+    w: PropTypes.number.isRequired,
     h: PropTypes.number.isRequired
   }).isRequired
 }
