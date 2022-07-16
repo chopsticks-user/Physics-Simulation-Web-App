@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react"
 import { Space2DController } from "../../modules/t3-helper/SpaceController.mjs"
 import Neko2D from "../../modules/neko-2d"
 
-const Space2D = ({ setSelectedPoint, setMeasureAttr, axesColor, gridLinesColor, displayGrid }) => {
+const Space2D = ({ setCenter, setMeasureAttr, axesColor, gridLinesColor, displayGrid }) => {
     const ref = useRef();
     const displayGridRef = useRef(displayGrid);
 
@@ -32,7 +32,7 @@ const Space2D = ({ setSelectedPoint, setMeasureAttr, axesColor, gridLinesColor, 
                         dragCurrent.y - dragLast.y
                     );
                     dragLast = dragCurrent;
-                    setSelectedPoint({x: dragCurrent.x, y: dragCurrent.y});
+                    setCenter({x: dragCurrent.x, y: dragCurrent.y});
                 }
             }
         });
@@ -42,7 +42,6 @@ const Space2D = ({ setSelectedPoint, setMeasureAttr, axesColor, gridLinesColor, 
         });
 
         ref.current.addEventListener("wheel", () => {
-            setMeasureAttr(controller.getMeasureAttr());
             space.scale = controller.camera.currentScale;
         });
 
@@ -53,7 +52,7 @@ const Space2D = ({ setSelectedPoint, setMeasureAttr, axesColor, gridLinesColor, 
             console.log(controller.orbit.t3Component.target);
         });
         console.log(performance.now() - ts);
-    }, [axesColor, gridLinesColor, setSelectedPoint, setMeasureAttr]);
+    }, [axesColor, gridLinesColor, setCenter, setMeasureAttr]);
 
     return (
         <div className="space-2d-container"

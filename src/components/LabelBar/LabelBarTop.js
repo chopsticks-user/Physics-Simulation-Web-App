@@ -1,10 +1,10 @@
 import PropTypes from "prop-types"
 
-const LabelBarTop = ({selectedPoint, labelSize}) => {
+const LabelBarTop = ({center, labelSize}) => {
   return (
     <div className="label-container" id="lcx">
       <div>
-        {selectedPoint.x}
+        {center.x}
       </div>
     </div>
   )

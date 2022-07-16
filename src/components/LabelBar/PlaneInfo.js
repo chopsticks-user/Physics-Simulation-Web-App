@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 const PlaneInfo = ({measureAttr}) => {
   return (
     <div className="label-container" id="lcpi">
-        <p>e{Math.floor(Math.log10(measureAttr.scale)) + 1}</p>
+        <p>{`${measureAttr.scale} ${measureAttr.unit}`}</p>
     </div>
   )
 }
