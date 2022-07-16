@@ -1,25 +1,24 @@
 import PropTypes from "prop-types"
 
-const PlaneInfo = ({measureAttr}) => {
+const LabelUnit = ({measureAttr}) => {
   return (
-    <div className="label-container" id="lcpi">
-        {/* <p>e{Math.floor(Math.log10(measureAttr.scale)) + 1}</p> */}
-        <p>{measureAttr.scale.toFixed(2)}</p>
+    <div className="label-container" id="lcu">
+        <p>e{Math.floor(Math.log10(measureAttr.scale)) + 1}</p>
         <p>{measureAttr.unit}</p>
         {/* {console.log(measureAttr.scale)} */}
     </div>
   )
 }
 
-PlaneInfo.defaultProps = {
+LabelUnit.defaultProps = {
   measureAttr: {scale: 1, unit: "m"}
 }
 
-PlaneInfo.propTypes = {
+LabelUnit.propTypes = {
   measureAttr: PropTypes.shape({
     scale: PropTypes.number.isRequired, 
     unit: PropTypes.string.isRequired
   }).isRequired
 }
 
-export default PlaneInfo;
+export default LabelUnit;

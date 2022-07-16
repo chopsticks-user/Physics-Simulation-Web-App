@@ -2,32 +2,21 @@
 import Space2D from "../Space2D"
 import LabelBarTop from "../LabelBar/LabelBarTop"
 import LabelBarLeft from "../LabelBar/LabelBarLeft"
-import PlaneInfo from "../LabelBar/PlaneInfo"
+import LabelUnit from "../LabelBar/LabelUnit"
 import { useState } from "react"
 
 const WorkSpace = () => {
-  const [center, setCenter] = useState({x: 0, y: 0});
+  const labelSize = { w: 20, h: 10 };
+  const [gridSize, setGridSize] = useState(0);
   const [measureAttr, setMeasureAttr] = useState({ scale: 1, unit: "m" });
-  const [selectedPoint, setSelectedPoint] = useState({x: 0, y: 0});
 
   return (
     <div className="work-space-container">
-      <LabelBarTop
-        center={center} 
-        selectedPoint = {selectedPoint} 
-        measureAttr={measureAttr}
-      />
-      <LabelBarLeft
-        center={center} 
-        selectedPoint = {selectedPoint} 
-        measureAttr={measureAttr}
-      />
-      <PlaneInfo measureAttr={measureAttr} />
-      <Space2D 
-        setCenter={setCenter} 
-        setMeasureAttr={setMeasureAttr} 
-        setSelectedPoint={setSelectedPoint} 
-      />
+      {/* {console.log(gridSize)} */}
+      <LabelBarTop labelSpacing={gridSize - labelSize.w} labelSize={labelSize} />
+      <LabelBarLeft labelSpacing={gridSize - labelSize.h} labelSize={labelSize} />
+      <LabelUnit measureAttr={measureAttr} />
+      <Space2D setGridSize={setGridSize} setMeasureAttr={setMeasureAttr} />
     </div>
   )
 }

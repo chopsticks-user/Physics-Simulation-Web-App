@@ -1,6 +1,6 @@
 #lcx {grid-area: top-bar;}
 #lcy {grid-area: left-bar;}
-#lcpi {grid-area: plane-info;}
+#lcu {grid-area: unit;}
 .space-2d-container {grid-area: space;}
 
 .work-space-container {
@@ -12,7 +12,7 @@
   grid-template-columns: var(--work-space-bar-size) auto;
   grid-template-rows: var(--work-space-bar-size) auto;
   grid-template-areas: 
-  "plane-info top-bar"
+  "unit top-bar"
   "left-bar space";
   overflow: auto;
   color: var(--work-space-text-color);

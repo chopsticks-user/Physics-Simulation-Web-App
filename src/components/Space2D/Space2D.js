@@ -3,27 +3,30 @@ import { useEffect, useRef } from "react"
 import { Space2DController } from "../../modules/t3-helper/SpaceController.mjs"
 import Neko2D from "../../modules/neko-2d"
 
-const Space2D = ({ setCenter, setMeasureAttr, setSelectedPoint, axesColor, gridLinesColor, displayGrid }) => {
+const Space2D = ({ setGridSize, setMeasureAttr, axesColor, gridLinesColor, displayGrid }) => {
     const ref = useRef();
     const displayGridRef = useRef(displayGrid);
 
     useEffect(() => {
-        let [w, h] = [ref.current.clientWidth, ref.current.clientHeight]
+        let ts = performance.now();
         const controller = new Space2DController(ref.current);
+        setGridSize(controller.getGridSize());
         const space = new Neko2D.Space();
         
+        let dragStart = controller.camera.getPosition();
         let dragCurrent = controller.camera.getPosition();
         let dragLast = controller.camera.getPosition();
         let dragged = false;
 
-        // setCenter(controller.camera.getPosition());
-
-        ref.current.addEventListener("mousedown", (e) => {
+        ref.current.addEventListener("mousedown", () => {
+            dragStart = controller.camera.getPosition();
             dragLast = controller.camera.getPosition();
             dragged = true;
+            console.log(dragStart);
+            console.log(space.view);
         });
 
-        ref.current.addEventListener("mousemove", (e) => {
+        ref.current.addEventListener("mousemove", () => {
             if (dragged) {
                 dragCurrent = controller.camera.getPosition();
                 if (dragLast.x !== dragCurrent.x || dragLast.y !== dragCurrent.y) {
@@ -32,32 +35,30 @@ const Space2D = ({ setCenter, setMeasureAttr, setSelectedPoint, axesColor, gridL
                         dragCurrent.y - dragLast.y
                     );
                     dragLast = dragCurrent;
-                    setCenter({x: space.view.x, y: space.view.y});
                 }
-            } else {
-                // console.log(e.offsetX, e.offsetY);
             }
         });
 
         ref.current.addEventListener("mouseup", () => {
             dragged = false;
+            console.log(dragCurrent);
+            console.log(space.view);
         });
 
         ref.current.addEventListener("wheel", () => {
-            const scaleAttr = controller.getMeasureAttr();
-            setMeasureAttr(scaleAttr);
-            space.scale = scaleAttr.scale;
+            setGridSize(controller.getGridSize());
+            setMeasureAttr(controller.getMeasureAttr());
+            space.scale = controller.camera.currentScale;
             console.log(space.scale);
         });
 
-        ref.current.addEventListener("dblclick", (e) => {
+        ref.current.addEventListener("dblclick", () => {
             displayGridRef.current = !displayGridRef.current;
+            console.log(displayGridRef.current);
             controller.displayGrid(displayGridRef.current);
-            console.log(space.scale, controller.camera.currentScale);
-            console.log(space.view);
-            console.log(controller.camera.getPosition());
         });
-    }, [setCenter, setMeasureAttr, setSelectedPoint, axesColor, gridLinesColor]);
+        console.log(performance.now() - ts);
+    }, [axesColor, gridLinesColor, setGridSize, setMeasureAttr]);
 
     return (
         <div className="space-2d-container"

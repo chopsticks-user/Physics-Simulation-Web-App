@@ -27,8 +27,7 @@ class Camera2D {
     updateViewAttr = () => {
         const position = this.getPosition();
         if (this.viewHeightWillBeReset()) {
-                // this.currentScale *= position.z / this.viewAttr.default;
-                this.currentScale *= position.z > this.viewAttr.default ? 2 : .5;
+                this.currentScale *= position.z / this.viewAttr.default
                 this.setPositionZ(this.viewAttr.default);
                 return true;
             }
@@ -37,8 +36,8 @@ class Camera2D {
 
     viewHeightWillBeReset = () => {
         return (
-            this.t3Component.position.y >= this.viewAttr.max || 
-            this.t3Component.position.y <= this.viewAttr.min
+            this.t3Component.position.y > this.viewAttr.max || 
+            this.t3Component.position.y < this.viewAttr.min
         );
     }
 

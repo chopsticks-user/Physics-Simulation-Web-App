@@ -2,7 +2,7 @@ import { Camera2D } from "./Camera.mjs"
 import { Renderer2D } from "./Renderer.mjs"
 import { Grid2D } from "./Grid.mjs"
 import { Orbit2D } from "./Orbit.mjs"
-import { toRadians } from "../neko-2d/ultis/Convert.js"
+import { toRadians } from "../neko-2d/ultis/ConvertMS.js"
 
 class Space2DController {
     constructor(parentDomElement) {
@@ -49,19 +49,17 @@ class Space2DController {
     }
 
     getGridSize = () => {
-        const cameraViewHeight = this.gridSizeWillBeReset() ? this.camera.viewAttr.default
-            : this.camera.getPosition().z;
+        const cameraViewHeight = this.camera.getPosition().z;
         const verticalFovInRadians = toRadians(this.camera.fov.ver)
         const verticalViewInPixels = this.camera.obs.height;
-        return 1 + verticalViewInPixels / (cameraViewHeight * 2 * Math.tan(verticalFovInRadians / 2));
+        return verticalViewInPixels / (cameraViewHeight * 2 * Math.tan(verticalFovInRadians / 2));
     }
 
     getMeasureAttr = () => {
         if (this.gridSizeWillBeReset()) {
             return {
-                scale: this.camera.currentScale * (this.camera.getPosition().z >= this.camera.viewAttr.default ? 2 : .5), 
-                // scale: this.camera.currentScale * this.getPosition().z
-                //     / this.camera.viewAttr.default,
+                scale: this.camera.currentScale * this.getPosition().z
+                    / this.camera.viewAttr.default,
                 unit: "m"
             }
         }
