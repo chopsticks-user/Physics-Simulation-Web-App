@@ -2,7 +2,7 @@ import Neko2D from "../Neko2D.mjs"
 
 ((module) => {
     var module = module || {};
-    module.Property = class {
+    module.Object = class {
         constructor({
             rx = 0, ry = 0, 
             vx = 0, vy = 0, 
