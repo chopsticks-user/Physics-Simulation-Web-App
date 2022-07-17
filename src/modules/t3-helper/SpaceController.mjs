@@ -75,4 +75,4 @@ class Space2DController {
     }
 }
 
-export { Space2DController };
+export default Space2DController;
