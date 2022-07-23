@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import Neko2D from "../../modules/neko-2d/index.mjs"
+import Neko2D from "../../modules/neko-2d/Neko2D.module.js"
 
 const LabelBarTop = ({center, selectedPoint, labelSize}) => {
   return (

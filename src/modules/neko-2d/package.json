@@ -1,0 +1,20 @@
+{
+    "name": "neko-2d",
+    "version": "1.0.0",
+    "description": "Physics 2D library",
+    "main": "src/Neko2D.module.js",
+    "type": "module",
+    "scripts": {
+        "start": "node Neko2D.module.js",
+        "test": "node test.mjs"
+    },
+    "dependencies": {
+
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chopsticks-user/Physics-2D"
+    },
+    "author": "Frost huuquangcap@gmail.com",
+    "keywords": ["Physics", "Physics 2D", "Neko2D"]
+}

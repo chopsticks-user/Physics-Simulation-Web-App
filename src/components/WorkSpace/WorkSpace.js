@@ -20,7 +20,6 @@ const WorkSpace = () => {
       <LabelBarLeft center={center} selectedPoint={selectedPoint} labelSize={labelSize} />
       <PlaneInfo measureAttr={measureAttr} />
       <Space2D setCenter={setCenter} setSelectedPoint={setSelectedPoint} setMeasureAttr={setMeasureAttr} />
-      {console.log(selectedPoint)}
     </div>
   )
 }

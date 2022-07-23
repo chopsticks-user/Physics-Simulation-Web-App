@@ -2,12 +2,11 @@ import { Camera2D } from "./Camera.mjs"
 import { Renderer2D } from "./Renderer.mjs"
 import { Grid2D } from "./Grid.mjs"
 import { Orbit2D } from "./Orbit.mjs"
-import Neko2D from "../neko-2d/index.mjs"
+import Neko2D from "../neko-2d/Neko2D.module.js"
 
 class Space2DController {
     constructor(parentDomElement) {
         if (Space2DController.instance) {
-            console.log("controller");
             return Space2DController.instance;
         }
         Space2DController.instance = this;

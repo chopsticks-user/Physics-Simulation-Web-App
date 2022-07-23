@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import { useEffect, useRef } from "react"
 import Space2DController from "../../modules/t3-helper/SpaceController.mjs"
-import Neko2D from "../../modules/neko-2d/index.mjs"
+import Neko2D from "../../modules/neko-2d/Neko2D.module.js"
 
 const Space2D = ({ setCenter, setSelectedPoint, setMeasureAttr, axesColor, gridLinesColor, displayGrid }) => {
     const ref = useRef();
@@ -56,7 +56,7 @@ const Space2D = ({ setCenter, setSelectedPoint, setMeasureAttr, axesColor, gridL
             console.log(space.view);
             console.log(space.scale);
         });
-    }, [axesColor, gridLinesColor, setCenter, setMeasureAttr]);
+    }, [axesColor, gridLinesColor, setCenter, setSelectedPoint, setMeasureAttr]);
 
     return (
         <div className="space-2d-container"
