@@ -2,7 +2,8 @@ import { Camera2D } from "./Camera.mjs"
 import { Renderer2D } from "./Renderer.mjs"
 import { Grid2D } from "./Grid.mjs"
 import { Orbit2D } from "./Orbit.mjs"
-import Neko2D from "../neko-2d/Neko2D.module.js"
+import * as Neko2D from "../neko-2d/Neko2D.module.js"
+import * as U from "../../modules/neko-2d/ultis/Ultis.module.js"
 
 class Space2DController {
     constructor(parentDomElement) {
@@ -49,7 +50,7 @@ class Space2DController {
 
     getGridSize = () => {
         const cameraViewHeight = this.camera.getPosition().z;
-        const verticalFovInRadians = Neko2D.toRadians(this.camera.fov.ver)
+        const verticalFovInRadians = U.toRadians(this.camera.fov.ver)
         const verticalViewInPixels = this.camera.obs.height;
         return verticalViewInPixels / (cameraViewHeight * 2 * Math.tan(verticalFovInRadians / 2));
     }

@@ -1,11 +1,12 @@
 import PropTypes from "prop-types"
-import Neko2D from "../../modules/neko-2d/Neko2D.module.js"
+import * as U from "../../modules/neko-2d/ultis/Ultis.module.js"
+// import * as Neko2D from "../../modules/neko-2d/Neko2D.module.js"
 
 const LabelBarTop = ({center, selectedPoint, labelSize}) => {
   return (
     <div className="label-container" id="lcx">
       <div>
-        {Neko2D.formatCoord3DPs(center).x}
+        {U.formatCoord3DPs(center).x}
       </div>
     </div>
   )

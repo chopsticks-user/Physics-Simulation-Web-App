@@ -1,11 +1,12 @@
 import PropTypes from "prop-types"
-import Neko2D from "../../modules/neko-2d/Neko2D.module.js"
+import * as U from "../../modules/neko-2d/ultis/Ultis.module.js"
+// import * as Neko2D from "../../modules/neko-2d/Neko2D.module.js"
 
 const LabelBarLeft = ({ center, selectedPoint, labelSize }) => {
   return (
     <div className="label-container" id="lcy">
       <div style={{ transform: "rotate(-90deg)" }}>
-      {Neko2D.formatCoord3DPs(center).y}
+      {U.formatCoord3DPs(center).y}
       </div>
     </div>
   )

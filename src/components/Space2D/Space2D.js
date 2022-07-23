@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import { useEffect, useRef } from "react"
 import Space2DController from "../../modules/t3-helper/SpaceController.mjs"
-import Neko2D from "../../modules/neko-2d/Neko2D.module.js"
+import * as Neko2D from "../../modules/neko-2d/Neko2D.module.js"
 
 const Space2D = ({ setCenter, setSelectedPoint, setMeasureAttr, axesColor, gridLinesColor, displayGrid }) => {
     const ref = useRef();
@@ -10,7 +10,7 @@ const Space2D = ({ setCenter, setSelectedPoint, setMeasureAttr, axesColor, gridL
     useEffect(() => {
         const [w, h] = [ref.current.clientWidth, ref.current.clientHeight];
         const controller = new Space2DController(ref.current);
-        const space = new Neko2D.Space();
+        // const space = new Neko2D.Space();
         
         let dragCurrent = controller.camera.getPosition();
         let dragLast = controller.camera.getPosition();
@@ -25,7 +25,7 @@ const Space2D = ({ setCenter, setSelectedPoint, setMeasureAttr, axesColor, gridL
             dragCurrent = controller.camera.getPosition();
             if (dragged) {
                 if (dragLast.x !== dragCurrent.x || dragLast.y !== dragCurrent.y) {
-                    space.view.transform(dragCurrent.x - dragLast.x, dragCurrent.y - dragLast.y);
+                    // space.view.transform(dragCurrent.x - dragLast.x, dragCurrent.y - dragLast.y);
                     dragLast = dragCurrent;
                     setCenter({x: dragCurrent.x, y: dragCurrent.y});
                 }
@@ -47,14 +47,14 @@ const Space2D = ({ setCenter, setSelectedPoint, setMeasureAttr, axesColor, gridL
         });
 
         ref.current.addEventListener("wheel", () => {
-            space.view.setScale(controller.camera.currentScale);
+            // space.view.setScale(controller.camera.currentScale);
         });
 
         ref.current.addEventListener("dblclick", () => {
             displayGridRef.current = !displayGridRef.current;
             controller.displayGrid(displayGridRef.current);
-            console.log(space.view);
-            console.log(space.scale);
+            // console.log(space.view);
+            // console.log(space.scale);
         });
     }, [axesColor, gridLinesColor, setCenter, setSelectedPoint, setMeasureAttr]);
 
