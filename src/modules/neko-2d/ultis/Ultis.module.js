@@ -1,7 +1,4 @@
-export { 
-    toDegrees,
-    toRadians
-} from "./Convert.mjs"
+// Modules that are independent from Neko2D
 
 export {
     timeStart,
@@ -25,11 +22,3 @@ export {
     looselyNumber,
     looselyV2
 } from "./TypeChecks.mjs"
-
-export {
-    QUADTREE_CAPACITY,
-    SPACE_VIEW_MAX_WIDTH,
-    SPACE_VIEW_MAX_HEIGHT,
-    MAXIMUM_N_OBJECTS,
-    SEARCH_RANGE_FACTOR
-} from "./Constants.mjs"

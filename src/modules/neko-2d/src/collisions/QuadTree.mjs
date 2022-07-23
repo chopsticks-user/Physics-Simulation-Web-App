@@ -1,4 +1,4 @@
-import { QUADTREE_CAPACITY } from "../../ultis/Ultis.module.js"
+import { QUADTREE_CAPACITY } from "../../src/Constants.mjs"
 
 export class QuadTree {
     #container;

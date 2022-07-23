@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import { useEffect, useRef } from "react"
-import Space2DController from "../../modules/t3-helper/SpaceController.mjs"
-import * as Neko2D from "../../modules/neko-2d/Neko2D.module.js"
+import { Space2DController } from "../../modules/t3-helper/SpaceController.mjs"
+// import * as Neko2D from "../../modules/neko-2d/Neko2D.module.js"
 
 const Space2D = ({ setCenter, setSelectedPoint, setMeasureAttr, axesColor, gridLinesColor, displayGrid }) => {
     const ref = useRef();

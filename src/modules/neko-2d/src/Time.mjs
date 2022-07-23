@@ -1,4 +1,4 @@
-import { timeStart } from "../ultis/Ultis.module.js"
+import { timeStart } from "../ultis/Debug.mjs"
 import { TIME } from "./Constants.mjs"
 
 export class Time {

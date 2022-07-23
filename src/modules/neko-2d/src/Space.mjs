@@ -4,7 +4,7 @@ import {
     SPACE_VIEW_MAX_HEIGHT,
     MAXIMUM_N_OBJECTS,
     SEARCH_RANGE_FACTOR
-} from "../ultis/Ultis.module.js"
+} from "../src/Constants.mjs"
 import { Time } from "./Time.mjs"
 import { SPACE } from "./Constants.mjs"
 
